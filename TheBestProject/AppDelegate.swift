@@ -84,7 +84,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAppRemoteDelegate, SPT
           return true
     }
     
-
+    // cleaning up app remote when the user switches from our application
+    func applicationWillResignActive(_ application: UIApplication) {
+      if self.appRemote.isConnected {
+        self.appRemote.disconnect()
+      }
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+      if let _ = self.appRemote.connectionParameters.accessToken {
+        self.appRemote.connect()
+      }
+    }
     
 }
 
