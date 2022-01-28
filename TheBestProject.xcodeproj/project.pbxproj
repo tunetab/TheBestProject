@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */; };
+		EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */; };
+		EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */; };
+		EC7970CA27A3AB3800EC61BB /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C927A3AB3800EC61BB /* ItemViewController.swift */; };
+		EC7970CC27A3AB5600EC61BB /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970CB27A3AB5600EC61BB /* PlaylistViewController.swift */; };
+		EC7970CE27A3B2A200EC61BB /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7970CD27A3B2A200EC61BB /* SpotifyiOS.framework */; };
 		EC7D5BB327A29F77006FD85A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BB227A29F77006FD85A /* AppDelegate.swift */; };
 		EC7D5BB527A29F77006FD85A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */; };
-		EC7D5BB727A29F77006FD85A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BB627A29F77006FD85A /* ViewController.swift */; };
 		EC7D5BBA27A29F77006FD85A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7D5BB827A29F77006FD85A /* Main.storyboard */; };
 		EC7D5BBC27A29F7A006FD85A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC7D5BBB27A29F7A006FD85A /* Assets.xcassets */; };
 		EC7D5BBF27A29F7A006FD85A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7D5BBD27A29F7A006FD85A /* LaunchScreen.storyboard */; };
@@ -36,10 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
+		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
+		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EC7970C927A3AB3800EC61BB /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		EC7970CB27A3AB5600EC61BB /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
+		EC7970CD27A3B2A200EC61BB /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		EC7D5BAF27A29F77006FD85A /* TheBestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheBestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7D5BB227A29F77006FD85A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EC7D5BB627A29F77006FD85A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EC7D5BB927A29F77006FD85A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC7D5BBB27A29F7A006FD85A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC7D5BBE27A29F7A006FD85A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7970CE27A3B2A200EC61BB /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +87,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC7970C727A3A33200EC61BB /* CollectionViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */,
+				EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */,
+			);
+			path = CollectionViewControllers;
+			sourceTree = "<group>";
+		};
+		EC7970C827A3A34000EC61BB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC7970CB27A3AB5600EC61BB /* PlaylistViewController.swift */,
+				EC7970C927A3AB3800EC61BB /* ItemViewController.swift */,
+				EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EC7970CF27A3B2CF00EC61BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC7970CD27A3B2A200EC61BB /* SpotifyiOS.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		EC7D5BA627A29F77006FD85A = {
 			isa = PBXGroup;
 			children = (
 				EC7D5BB127A29F77006FD85A /* TheBestProject */,
 				EC7D5BC827A29F7A006FD85A /* TheBestProjectTests */,
 				EC7D5BD227A29F7A006FD85A /* TheBestProjectUITests */,
+				EC7970CF27A3B2CF00EC61BB /* Frameworks */,
 				EC7D5BB027A29F77006FD85A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,11 +140,12 @@
 			children = (
 				EC7D5BB227A29F77006FD85A /* AppDelegate.swift */,
 				EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */,
-				EC7D5BB627A29F77006FD85A /* ViewController.swift */,
 				EC7D5BB827A29F77006FD85A /* Main.storyboard */,
 				EC7D5BBB27A29F7A006FD85A /* Assets.xcassets */,
 				EC7D5BBD27A29F7A006FD85A /* LaunchScreen.storyboard */,
 				EC7D5BC027A29F7A006FD85A /* Info.plist */,
+				EC7970C827A3A34000EC61BB /* ViewControllers */,
+				EC7970C727A3A33200EC61BB /* CollectionViewControllers */,
 			);
 			path = TheBestProject;
 			sourceTree = "<group>";
@@ -258,9 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC7D5BB727A29F77006FD85A /* ViewController.swift in Sources */,
 				EC7D5BB327A29F77006FD85A /* AppDelegate.swift in Sources */,
+				EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */,
+				EC7970CC27A3AB5600EC61BB /* PlaylistViewController.swift in Sources */,
+				EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */,
+				EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */,
 				EC7D5BB527A29F77006FD85A /* SceneDelegate.swift in Sources */,
+				EC7970CA27A3AB3800EC61BB /* ItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +484,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FZX4Y9JD7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TheBestProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -468,6 +516,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FZX4Y9JD7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TheBestProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
