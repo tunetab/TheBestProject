@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665C27A3CD29001AA5F5 /* Users.swift */; };
+		EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665E27A3CFFB001AA5F5 /* Track.swift */; };
+		EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */; };
 		EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */; };
 		EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */; };
 		EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */; };
 		EC7970CA27A3AB3800EC61BB /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C927A3AB3800EC61BB /* ItemViewController.swift */; };
 		EC7970CC27A3AB5600EC61BB /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970CB27A3AB5600EC61BB /* PlaylistViewController.swift */; };
-		EC7970CE27A3B2A200EC61BB /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7970CD27A3B2A200EC61BB /* SpotifyiOS.framework */; };
 		EC7D5BB327A29F77006FD85A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BB227A29F77006FD85A /* AppDelegate.swift */; };
 		EC7D5BB527A29F77006FD85A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */; };
 		EC7D5BBA27A29F77006FD85A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7D5BB827A29F77006FD85A /* Main.storyboard */; };
@@ -41,12 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC53665C27A3CD29001AA5F5 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		EC53665E27A3CFFB001AA5F5 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		EC53666027A3D2AD001AA5F5 /* TheBestProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheBestProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EC7970C927A3AB3800EC61BB /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		EC7970CB27A3AB5600EC61BB /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
-		EC7970CD27A3B2A200EC61BB /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		EC7D5BAF27A29F77006FD85A /* TheBestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheBestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7D5BB227A29F77006FD85A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC7970CE27A3B2A200EC61BB /* SpotifyiOS.framework in Frameworks */,
+				EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +92,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC53665B27A3CD12001AA5F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC53665C27A3CD29001AA5F5 /* Users.swift */,
+				EC53665E27A3CFFB001AA5F5 /* Track.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		EC53666627A3D833001AA5F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		EC7970C727A3A33200EC61BB /* CollectionViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,21 +128,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		EC7970CF27A3B2CF00EC61BB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EC7970CD27A3B2A200EC61BB /* SpotifyiOS.framework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 		EC7D5BA627A29F77006FD85A = {
 			isa = PBXGroup;
 			children = (
+				EC53666627A3D833001AA5F5 /* Frameworks */,
 				EC7D5BB127A29F77006FD85A /* TheBestProject */,
 				EC7D5BC827A29F7A006FD85A /* TheBestProjectTests */,
 				EC7D5BD227A29F7A006FD85A /* TheBestProjectUITests */,
-				EC7970CF27A3B2CF00EC61BB /* Frameworks */,
 				EC7D5BB027A29F77006FD85A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,12 +152,14 @@
 		EC7D5BB127A29F77006FD85A /* TheBestProject */ = {
 			isa = PBXGroup;
 			children = (
+				EC53666027A3D2AD001AA5F5 /* TheBestProject-Bridging-Header.h */,
 				EC7D5BB227A29F77006FD85A /* AppDelegate.swift */,
 				EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */,
 				EC7D5BB827A29F77006FD85A /* Main.storyboard */,
 				EC7D5BBB27A29F7A006FD85A /* Assets.xcassets */,
 				EC7D5BBD27A29F7A006FD85A /* LaunchScreen.storyboard */,
 				EC7D5BC027A29F7A006FD85A /* Info.plist */,
+				EC53665B27A3CD12001AA5F5 /* Models */,
 				EC7970C827A3A34000EC61BB /* ViewControllers */,
 				EC7970C727A3A33200EC61BB /* CollectionViewControllers */,
 			);
@@ -303,6 +319,8 @@
 				EC7970CC27A3AB5600EC61BB /* PlaylistViewController.swift in Sources */,
 				EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */,
 				EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */,
+				EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */,
+				EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */,
 				EC7D5BB527A29F77006FD85A /* SceneDelegate.swift in Sources */,
 				EC7970CA27A3AB3800EC61BB /* ItemViewController.swift in Sources */,
 			);
@@ -487,6 +505,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TheBestProject/Info.plist;
@@ -500,11 +519,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheBestProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/TheBestProject/TheBestProject-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Debug;
 		};
@@ -519,6 +541,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TheBestProject/Info.plist;
@@ -532,11 +555,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheBestProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/TheBestProject/TheBestProject-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 			};
 			name = Release;
 		};
