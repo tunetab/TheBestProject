@@ -11,7 +11,7 @@
 			<string>com.example.TheBestProject</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com-spotify-test</string>
+				<string>spotify-educational-project</string>
 			</array>
 		</dict>
 	</array>

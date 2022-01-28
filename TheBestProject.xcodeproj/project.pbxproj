@@ -10,6 +10,7 @@
 		EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665C27A3CD29001AA5F5 /* Users.swift */; };
 		EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665E27A3CFFB001AA5F5 /* Track.swift */; };
 		EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */; };
+		EC53666A27A3E793001AA5F5 /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */; };
 		EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */; };
 		EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */; };
 		EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */; };
@@ -47,6 +48,7 @@
 		EC53665E27A3CFFB001AA5F5 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		EC53666027A3D2AD001AA5F5 /* TheBestProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheBestProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC53666B27A3E796001AA5F5 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
 		EC7970C727A3A33200EC61BB /* CollectionViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 				EC7D5BBB27A29F7A006FD85A /* Assets.xcassets */,
 				EC7D5BBD27A29F7A006FD85A /* LaunchScreen.storyboard */,
 				EC7D5BC027A29F7A006FD85A /* Info.plist */,
+				EC53666B27A3E796001AA5F5 /* CollectionViewCells */,
 				EC53665B27A3CD12001AA5F5 /* Models */,
 				EC7970C827A3A34000EC61BB /* ViewControllers */,
 				EC7970C727A3A33200EC61BB /* CollectionViewControllers */,
@@ -318,6 +329,7 @@
 				EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */,
 				EC7970CC27A3AB5600EC61BB /* PlaylistViewController.swift in Sources */,
 				EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */,
+				EC53666A27A3E793001AA5F5 /* PlaylistCollectionViewCell.swift in Sources */,
 				EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */,
 				EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */,
 				EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */,
