@@ -1,13 +1,13 @@
 //
-//  ItemViewController.swift
+//  PlayerViewController.swift
 //  TheBestProject
 //
-//  Created by Стажер on 28.01.2022.
+//  Created by Стажер on 31.01.2022.
 //
 
 import UIKit
 
-class ItemViewController: UIViewController {
+class PlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
