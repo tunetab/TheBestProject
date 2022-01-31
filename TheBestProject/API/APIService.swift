@@ -11,7 +11,7 @@ struct TrackRequest: APIRequest {
     
     var postData: Data?
     
-    typealias Response = [String: Track]
+    typealias Response = [Track]
     
     var track: Track?
     

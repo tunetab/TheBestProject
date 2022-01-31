@@ -27,6 +27,7 @@
 		EC9BA91127A7DE3600426468 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91027A7DE3600426468 /* Artist.swift */; };
 		EC9BA91527A7DE5100426468 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91327A7DE5100426468 /* APIService.swift */; };
 		EC9BA91627A7DE5100426468 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91427A7DE5100426468 /* APIRequest.swift */; };
+		EC9BA91827A7DF6900426468 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91727A7DF6900426468 /* Playlist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		EC9BA91027A7DE3600426468 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		EC9BA91327A7DE5100426468 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		EC9BA91427A7DE5100426468 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		EC9BA91727A7DF6900426468 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				EC53665C27A3CD29001AA5F5 /* Users.swift */,
 				EC53665E27A3CFFB001AA5F5 /* Track.swift */,
 				EC9BA91027A7DE3600426468 /* Artist.swift */,
+				EC9BA91727A7DF6900426468 /* Playlist.swift */,
 				EC9BA90E27A7DE2600426468 /* Settings.swift */,
 			);
 			name = Models;
@@ -177,9 +180,9 @@
 				EC7D5BBD27A29F7A006FD85A /* LaunchScreen.storyboard */,
 				EC7D5BC027A29F7A006FD85A /* Info.plist */,
 				EC9BA91227A7DE5100426468 /* API */,
-				EC53666B27A3E796001AA5F5 /* CollectionViewCells */,
 				EC53665B27A3CD12001AA5F5 /* Models */,
 				EC7970C827A3A34000EC61BB /* ViewControllers */,
+				EC53666B27A3E796001AA5F5 /* CollectionViewCells */,
 				EC7970C727A3A33200EC61BB /* CollectionViewControllers */,
 			);
 			path = TheBestProject;
@@ -345,6 +348,7 @@
 				EC7D5BB327A29F77006FD85A /* AppDelegate.swift in Sources */,
 				EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */,
 				EC9BA91627A7DE5100426468 /* APIRequest.swift in Sources */,
+				EC9BA91827A7DF6900426468 /* Playlist.swift in Sources */,
 				EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */,
 				EC9BA90D27A7DDB200426468 /* PlaylistCollectionViewController.swift in Sources */,
 				EC9BA90F27A7DE2600426468 /* Settings.swift in Sources */,

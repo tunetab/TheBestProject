@@ -11,7 +11,7 @@ import UIKit
 struct Track {
     let trackName: String
     let artWorkUrl130: URL
-    let duration: Date
+    let duration: TimeInterval
     let artistName: String
     let album: String
 }
@@ -31,3 +31,4 @@ extension Track: Comparable {
     }
 }
 
+extension Track: Codable { }
