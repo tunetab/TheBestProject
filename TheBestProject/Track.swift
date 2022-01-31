@@ -9,11 +9,25 @@ import Foundation
 import UIKit
 
 struct Track {
-    let name: String
-    let artist: String
-    let genre: String
-    let coverImage: UIImage
+    let trackName: String
+    let artWorkUrl130: URL
+    let duration: Date
+    let artistName: String
     let album: String
-    let year: Date
-    let url: URL
 }
+
+extension Track: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(trackName)
+    }
+    static func == (lhs: Track, rhs: Track) -> Bool {
+        return lhs.artWorkUrl130 == rhs.artWorkUrl130
+    }
+}
+
+extension Track: Comparable {
+    static func < (_ lhs: Track, _ rhs: Track) -> Bool {
+        return lhs.trackName < rhs.trackName
+    }
+}
+
