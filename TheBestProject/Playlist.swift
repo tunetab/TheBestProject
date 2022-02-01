@@ -10,11 +10,14 @@ import UIKit
 
 struct Playlist {
     var name: String
-    var date: Date
-    var description: String
+    //var date: Date
+    //var author: User
+    //var description: String
     var image: UIImage
-    var tracks: [Track]
+    //var tracks: [Track]
 }
+
+//extension Playlist: Codable {  }
 
 extension Playlist: Hashable {
     func hash(into hasher: inout Hasher) {
@@ -27,8 +30,7 @@ extension Playlist: Hashable {
 
 extension Playlist: Comparable {
     static func < (_ lhs: Playlist, _ rhs: Playlist) -> Bool {
-        return lhs.date < rhs.date
+        return lhs.name < rhs.name
     }
 }
 
-extension Playlist: Codable {  }

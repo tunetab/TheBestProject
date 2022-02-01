@@ -30,6 +30,7 @@ struct Settings {
               let data = string.data(using: .utf8) else { return nil }
         return try! JSONDecoder().decode(T.self, from: data)
     }
+
     
     var favoriteTracks: [Track] {
         get {
@@ -50,6 +51,7 @@ struct Settings {
         }
     }
     
+    /*
     var playlists: [Playlist] {
         get {
             unarchiveJSON(key: Setting.playlists) ?? []
@@ -58,5 +60,10 @@ struct Settings {
             archiveJSON(value: newValue, key: Setting.playlists)
         }
     }
+    */
+    var playlists: [Playlist] = [
+        Playlist(name: "Melancolic", image: UIImage(systemName: "eye")!),
+        Playlist(name: "Grunge", image: UIImage(systemName: "gear")!)
+    ]
     
 }

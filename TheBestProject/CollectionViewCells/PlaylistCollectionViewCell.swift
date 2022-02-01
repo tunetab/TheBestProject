@@ -9,4 +9,7 @@ import UIKit
 
 class PlaylistCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var playlistNameLabel: UILabel!
+    @IBOutlet weak var playListImageView: UIImageView!
+    
 }
