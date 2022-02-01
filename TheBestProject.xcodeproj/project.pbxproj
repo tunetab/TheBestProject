@@ -12,6 +12,8 @@
 		EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */; };
 		EC53666A27A3E793001AA5F5 /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */; };
 		EC6C0A9827A8EA0F002B0245 /* AddPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C0A9727A8EA0F002B0245 /* AddPlaylistViewController.swift */; };
+		EC6C0A9A27A9032C002B0245 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C0A9927A9032C002B0245 /* TrackCollectionViewCell.swift */; };
+		EC6C0A9C27A9165F002B0245 /* FetchingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C0A9B27A9165F002B0245 /* FetchingItems.swift */; };
 		EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */; };
 		EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */; };
 		EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */; };
@@ -55,6 +57,8 @@
 		EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		EC6C0A9727A8EA0F002B0245 /* AddPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaylistViewController.swift; sourceTree = "<group>"; };
+		EC6C0A9927A9032C002B0245 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
+		EC6C0A9B27A9165F002B0245 /* FetchingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingItems.swift; sourceTree = "<group>"; };
 		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */,
+				EC6C0A9927A9032C002B0245 /* TrackCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 			children = (
 				EC9BA91427A7DE5100426468 /* APIRequest.swift */,
 				EC9BA91327A7DE5100426468 /* APIService.swift */,
+				EC6C0A9B27A9165F002B0245 /* FetchingItems.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -352,6 +358,8 @@
 				EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */,
 				EC9BA91627A7DE5100426468 /* APIRequest.swift in Sources */,
 				EC9BA91827A7DF6900426468 /* Playlist.swift in Sources */,
+				EC6C0A9A27A9032C002B0245 /* TrackCollectionViewCell.swift in Sources */,
+				EC6C0A9C27A9165F002B0245 /* FetchingItems.swift in Sources */,
 				EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */,
 				EC6C0A9827A8EA0F002B0245 /* AddPlaylistViewController.swift in Sources */,
 				EC9BA90D27A7DDB200426468 /* PlaylistCollectionViewController.swift in Sources */,

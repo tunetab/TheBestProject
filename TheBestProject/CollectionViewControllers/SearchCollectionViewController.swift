@@ -9,80 +9,111 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class SearchCollectionViewController: UICollectionViewController {
-
+@MainActor
+class SearchCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
+    
+    let searchController = UISearchController()
+    let storeItemController = StoreItemController()
+    
+    var searchItems = [Track]()
+    let queryOptions = ["", "music", "artist", ""]
+    
+    typealias DataSourceType = UICollectionViewDiffableDataSource<String, Track>
+    var dataSource: DataSourceType!
+    
+    var trackSearchTask: Task<Void, Never>? = nil
+    deinit { trackSearchTask?.cancel() }
+    
+    // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.automaticallyShowsSearchResultsController = true
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["all", "track", "artist", "users"]
+        
     }
 
-    /*
-    // MARK: - Navigation
+    // MARK: searchControllerAction
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    func updateSearchResults(for searchController: UISearchController) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(update), object: nil)
+        perform(#selector(update), with: nil, afterDelay: 0.3)
     }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        // Configure the cell
+    // MARK: update()
     
-        return cell
+    @objc func update() {
+        
+        self.searchItems = []
+        let searchTerm = searchController.searchBar.text ?? ""
+        let mediaType = queryOptions[searchController.searchBar.selectedScopeButtonIndex]
+        
+        trackSearchTask?.cancel()
+        trackSearchTask = Task {
+            if !searchTerm.isEmpty {
+
+                let query = [
+                    "term": searchTerm,
+                    "media": mediaType,
+                    "lang": "en_us",
+                    "limit": "20"
+                ]
+                if let items = try? await storeItemController.fetchTracks(matching: query) {
+                    self.searchItems = items
+                } else {
+                    self.searchItems = []
+                    print("Items haven't collected")
+                }
+
+            }
+            self.updateCollectionView()
+            trackSearchTask = nil
+        }
+        dataSource = createDataSource()
+        collectionView.dataSource = dataSource
+        collectionView.collectionViewLayout = createLayout()
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    // MARK: updateCollectionView()
+    
+    func updateCollectionView() {
+        var snapshot = NSDiffableDataSourceSnapshot<String, Track>()
+        
+        snapshot.appendSections(["Results"])
+        snapshot.appendItems(self.searchItems, toSection: "Results")
+        
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
-    */
+    
+    // MARK: createDataSource()
+    
+    func createDataSource() -> DataSourceType {
+        let dataSource = UICollectionViewDiffableDataSource<String, Track> (collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCell", for: indexPath) as! TrackCollectionViewCell
+            cell.trackNameLabel.text = item.trackName
+            cell.artistLabel.text = item.artistName
+            return cell
+        })
+        return dataSource
+    }
 
+    // MARK: createLayout()
+    
+    func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        section.interGroupSpacing = 8
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
 }

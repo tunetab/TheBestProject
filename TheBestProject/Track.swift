@@ -10,10 +10,10 @@ import UIKit
 
 struct Track {
     let trackName: String
-    let artWorkUrl130: URL
-    let duration: TimeInterval
+    let artWorkUrl100: URL
+    //let duration: TimeInterval
     let artistName: String
-    let album: String
+    //let album: String
 }
 
 extension Track: Hashable {
@@ -21,7 +21,7 @@ extension Track: Hashable {
         hasher.combine(trackName)
     }
     static func == (lhs: Track, rhs: Track) -> Bool {
-        return lhs.artWorkUrl130 == rhs.artWorkUrl130
+        return lhs.artWorkUrl100 == rhs.artWorkUrl100
     }
 }
 
@@ -32,3 +32,4 @@ extension Track: Comparable {
 }
 
 extension Track: Codable { }
+
