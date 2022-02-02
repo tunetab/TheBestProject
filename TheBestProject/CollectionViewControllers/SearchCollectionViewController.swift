@@ -45,6 +45,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     }
     
     // MARK: searchController Actions
+    
     func updateSearchResults(for searchController: UISearchController) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fetchMatchingItems), object: nil)
         perform(#selector(fetchMatchingItems), with: nil, afterDelay: 0.3)
@@ -129,4 +130,38 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
             
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
+    // MARK: contextMenuConfig
+    
+    private func AddingTrackSegue(track: Track) {
+        performSegue(withIdentifier: "AddTrackToPlaylists", sender: track)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let item = self.dataSource.itemIdentifier(for: indexPath)!
+            
+            let favoriteToggle = UIAction(title: Settings.shared.favoriteTracks.contains(item) ? "Unfavorite" : "Favorite") { (action) in
+                Settings.shared.toggleFavorite(item)
+            }
+            
+            let addToPlaylist = UIAction(title: "Add to Playlist") { [weak self] (action) in
+                self?.AddingTrackSegue(track: item)
+            }
+            
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [favoriteToggle, addToPlaylist])
+        }
+        return config
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "AddTrackToPlaylists",
+              let _ = segue.destination as? AddTrackToPlaylistCollectionViewController else { return }
+        
+        if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
+            let chosenTrack = items[indexPath.row]
+            AddingTrackSegue(track: chosenTrack)
+        }
+    }
+    
 }

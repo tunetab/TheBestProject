@@ -19,19 +19,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9qb-OU-952">
-                            <size key="itemSize" width="128" height="128"/>
+                            <size key="itemSize" width="367" height="73"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="on1-NT-2P8">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <rect key="frame" x="23.5" y="0.0" width="367" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eu3-H1-eWw">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="367" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="367" height="73"/>
                                 <connections>
                                     <segue destination="t2v-Vh-Rnv" kind="presentation" id="HGy-mF-5zC"/>
                                 </connections>
@@ -46,7 +47,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lh-e2-LEa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-543" y="-24"/>
+            <point key="canvasLocation" x="-543.47826086956525" y="-24.107142857142858"/>
         </scene>
         <!--Search Collection View Controller-->
         <scene sceneID="Pgl-bh-sTD">
@@ -125,6 +126,9 @@
                     <navigationItem key="navigationItem" id="OG5-TI-7gc">
                         <nil key="title"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="TS6-as-6mm" kind="showDetail" identifier="AddTrackToPlaylists" id="vBf-Cn-Bi1"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Qg-EE-gxs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -289,10 +293,11 @@
                         <viewLayoutGuide key="safeArea" id="I3r-Ph-A6G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="YmA-Qw-79q"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbQ-bs-M0R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1975" y="327"/>
+            <point key="canvasLocation" x="1972" y="328"/>
         </scene>
         <!--Search-->
         <scene sceneID="5Il-dR-Rj0">
@@ -387,6 +392,107 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="juC-vz-pK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-543" y="696"/>
+        </scene>
+        <!--Choose Playlist-->
+        <scene sceneID="rt7-wi-vSu">
+            <objects>
+                <collectionViewController id="cm9-5b-xgs" customClass="AddTrackToPlaylistCollectionViewController" customModule="TheBestProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dKV-3j-DeD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1g0-Q1-BMx">
+                            <size key="itemSize" width="269" height="81"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="PlaylistCell" id="d1q-GS-5O2" customClass="PlaylistCollectionViewCell" customModule="TheBestProject" customModuleProvider="target">
+                                <rect key="frame" x="72.5" y="0.0" width="269" height="81"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hJE-gj-6fg">
+                                    <rect key="frame" x="0.0" y="0.0" width="269" height="81"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PInk_Floyd_-_The_Piper_at_the_Gates_of_Dawn" translatesAutoresizingMaskIntoConstraints="NO" id="Knk-L7-6fW" userLabel="ItemImageView">
+                                            <rect key="frame" x="0.0" y="0.0" width="81" height="81"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="Knk-L7-6fW" secondAttribute="height" multiplier="1:1" id="iq6-YN-LZ7"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ItemNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bo5-ij-WMQ">
+                                            <rect key="frame" x="86" y="29" width="178" height="23"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bo5-ij-WMQ" firstAttribute="centerY" secondItem="hJE-gj-6fg" secondAttribute="centerY" id="3dX-ya-KnF"/>
+                                        <constraint firstItem="Knk-L7-6fW" firstAttribute="top" secondItem="hJE-gj-6fg" secondAttribute="top" id="Flu-hz-vFD"/>
+                                        <constraint firstItem="bo5-ij-WMQ" firstAttribute="leading" secondItem="Knk-L7-6fW" secondAttribute="trailing" constant="5" id="KWM-o2-jVi"/>
+                                        <constraint firstItem="Knk-L7-6fW" firstAttribute="leading" secondItem="hJE-gj-6fg" secondAttribute="leading" id="UFl-rz-KHQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="Knk-L7-6fW" secondAttribute="bottom" id="j4P-Uv-Gov"/>
+                                        <constraint firstAttribute="trailing" secondItem="bo5-ij-WMQ" secondAttribute="trailing" constant="5" id="t93-rQ-IaU"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="269" height="81"/>
+                                <connections>
+                                    <outlet property="playListImageView" destination="Knk-L7-6fW" id="4Bw-lr-WxI"/>
+                                    <outlet property="playlistNameLabel" destination="bo5-ij-WMQ" id="9bZ-zu-Tpc"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="cm9-5b-xgs" id="6WQ-gF-J5g"/>
+                            <outlet property="delegate" destination="cm9-5b-xgs" id="49K-KA-x8z"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Choose Playlist" id="SWC-S4-Zwd">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="QLM-mZ-K7E">
+                            <connections>
+                                <segue destination="UAO-7q-FAV" kind="showDetail" id="VnZ-E3-304"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pt2-V0-adT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="325" y="1406"/>
+        </scene>
+        <!--Add Playlist View Controller-->
+        <scene sceneID="xWW-51-qFu">
+            <objects>
+                <viewController id="UAO-7q-FAV" customClass="AddPlaylistViewController" customModule="TheBestProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vh4-mr-WjJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="htx-eb-HGN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elc-Wv-UfB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1199" y="1406"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bhq-3C-Du5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TS6-as-6mm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eGe-FP-g5x">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cm9-5b-xgs" kind="relationship" relationship="rootViewController" id="V4f-Ji-QwK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xRc-KJ-QXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="325" y="696"/>
         </scene>
     </scenes>
     <resources>

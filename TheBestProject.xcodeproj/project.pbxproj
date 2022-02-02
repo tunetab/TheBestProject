@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC1F362427AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */; };
 		EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665C27A3CD29001AA5F5 /* Users.swift */; };
 		EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665E27A3CFFB001AA5F5 /* Track.swift */; };
 		EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackToPlaylistCollectionViewController.swift; sourceTree = "<group>"; };
 		EC53665C27A3CD29001AA5F5 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		EC53665E27A3CFFB001AA5F5 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		EC53666027A3D2AD001AA5F5 /* TheBestProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheBestProject-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -140,9 +142,10 @@
 		EC7970C727A3A33200EC61BB /* CollectionViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EC9BA90C27A7DDB200426468 /* PlaylistCollectionViewController.swift */,
-				EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */,
 				EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */,
+				EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */,
+				EC9BA90C27A7DDB200426468 /* PlaylistCollectionViewController.swift */,
+				EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */,
 			);
 			path = CollectionViewControllers;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				EC9BA91627A7DE5100426468 /* APIRequest.swift in Sources */,
 				EC9BA91827A7DF6900426468 /* Playlist.swift in Sources */,
 				EC6C0A9A27A9032C002B0245 /* TrackCollectionViewCell.swift in Sources */,
+				EC1F362427AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift in Sources */,
 				EC6C0A9C27A9165F002B0245 /* FetchingItems.swift in Sources */,
 				EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */,
 				EC6C0A9827A8EA0F002B0245 /* AddPlaylistViewController.swift in Sources */,
