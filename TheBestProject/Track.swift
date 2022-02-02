@@ -8,28 +8,40 @@
 import Foundation
 import UIKit
 
-struct Track {
-    let trackName: String
-    let artWorkUrl100: URL
-    //let duration: TimeInterval
-    let artistName: String
-    //let album: String
+struct Track: Codable {
+    var name: String
+    var artist: String
+    var artworkURL: URL
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "trackName"
+        case artist = "artistName"
+        case artworkURL = "artworkUrl30"
+    }
+
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.name = try values.decode(String.self, forKey: CodingKeys.name)
+        self.artist = try values.decode(String.self, forKey: CodingKeys.artist)
+        self.artworkURL = try values.decode(URL.self, forKey: CodingKeys.artworkURL)
+    }
 }
 
 extension Track: Hashable {
     func hash(into hasher: inout Hasher) {
-        hasher.combine(trackName)
+        hasher.combine(name)
     }
     static func == (lhs: Track, rhs: Track) -> Bool {
-        return lhs.artWorkUrl100 == rhs.artWorkUrl100
+        return lhs.artworkURL == rhs.artworkURL
     }
 }
 
 extension Track: Comparable {
     static func < (_ lhs: Track, _ rhs: Track) -> Bool {
-        return lhs.trackName < rhs.trackName
+        return lhs.name < rhs.name
     }
 }
 
-extension Track: Codable { }
 

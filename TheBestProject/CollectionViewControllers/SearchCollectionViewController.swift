@@ -15,13 +15,15 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     let searchController = UISearchController()
     let storeItemController = StoreItemController()
     
-    var searchItems = [Track]()
-    let queryOptions = ["", "music", "artist", ""]
+    enum Section: CaseIterable {
+        case main
+    }
     
-    typealias DataSourceType = UICollectionViewDiffableDataSource<String, Track>
-    var dataSource: DataSourceType!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Track>!
+    var itemsSnapshot = NSDiffableDataSourceSnapshot<Section, Track>()
     
     var trackSearchTask: Task<Void, Never>? = nil
+    var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     deinit { trackSearchTask?.cancel() }
     
     // MARK: viewDidLoad()
@@ -32,9 +34,11 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.automaticallyShowsSearchResultsController = true
-        searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.scopeButtonTitles = ["all", "track", "artist", "users"]
+        //searchController.searchBar.showsScopeBar = true
+        //searchController.searchBar.scopeButtonTitles = ["Tracks", "Users"]
         
+        createDataSource()
+        collectionView.collectionViewLayout = createLayout()
     }
 
     // MARK: searchControllerAction
@@ -48,57 +52,80 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     
     @objc func update() {
         
-        self.searchItems = []
+        itemsSnapshot.deleteAllItems()
+        
         let searchTerm = searchController.searchBar.text ?? ""
-        let mediaType = queryOptions[searchController.searchBar.selectedScopeButtonIndex]
+        
+        imageLoadTasks.values.forEach { task in task.cancel() }
+        imageLoadTasks = [:]
         
         trackSearchTask?.cancel()
         trackSearchTask = Task {
             if !searchTerm.isEmpty {
-
-                let query = [
-                    "term": searchTerm,
-                    "media": mediaType,
-                    "lang": "en_us",
-                    "limit": "20"
-                ]
-                if let items = try? await storeItemController.fetchTracks(matching: query) {
-                    self.searchItems = items
-                } else {
-                    self.searchItems = []
-                    print("Items haven't collected")
+                do {
+                    try await fetchAndHandleItemsForSearchScopes(withSearchTerm: searchTerm)
+                } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
+                    
+                } catch {
+                    print(error)
                 }
-
+            } else {
+                await self.dataSource.apply(self.itemsSnapshot, animatingDifferences: true)
             }
-            self.updateCollectionView()
             trackSearchTask = nil
         }
-        dataSource = createDataSource()
-        collectionView.dataSource = dataSource
-        collectionView.collectionViewLayout = createLayout()
     }
     
-    // MARK: updateCollectionView()
+    // MARK: Handle snapshots
     
-    func updateCollectionView() {
-        var snapshot = NSDiffableDataSourceSnapshot<String, Track>()
+    func fetchAndHandleItemsForSearchScopes(withSearchTerm searchTerm: String) async throws {
+        try Task.checkCancellation()
+        let query = [
+            "term": searchTerm,
+            "media": "music",
+            "lang": "en_us",
+            "limit": "50"
+        ]
+        let items = try await self.storeItemController.fetchItems(matching: query)
         
-        snapshot.appendSections(["Results"])
-        snapshot.appendItems(self.searchItems, toSection: "Results")
+        if searchTerm == self.searchController.searchBar.text {
+            await handleFetchedItems(items)
+        }
+    }
+    
+    func handleFetchedItems(_ items: [Track]) async {
+        var updatedSnapshot = NSDiffableDataSourceSnapshot<Section, Track>()
+        updatedSnapshot.appendItems(items, toSection: .main)
+        itemsSnapshot = updatedSnapshot
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        await dataSource.apply(itemsSnapshot, animatingDifferences: true)
     }
     
     // MARK: createDataSource()
     
-    func createDataSource() -> DataSourceType {
-        let dataSource = UICollectionViewDiffableDataSource<String, Track> (collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
+    func createDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Track>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCell", for: indexPath) as! TrackCollectionViewCell
-            cell.trackNameLabel.text = item.trackName
-            cell.artistLabel.text = item.artistName
+            
+            cell.trackNameLabel.text = item.name
+            cell.artistLabel.text = item.artist
+            
+            self.imageLoadTasks[indexPath]?.cancel()
+            self.imageLoadTasks[indexPath] = Task {
+                do {
+                    let image = try await self.storeItemController.fetchImage(from: item.artworkURL)
+                    cell.albumCoverImageView.image = image
+                } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
+                    // ignore cancellation errors
+                } catch {
+                    cell.albumCoverImageView.image = UIImage(systemName: "photo")
+                    print("Error fetching image: \(error)")
+                }
+                self.imageLoadTasks[indexPath] = nil
+            }
+            
             return cell
         })
-        return dataSource
     }
 
     // MARK: createLayout()
