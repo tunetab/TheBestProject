@@ -11,12 +11,14 @@ import UIKit
 struct Track: Codable {
     var name: String
     var artist: String
+    var id: Int
     var artworkURL: URL
     
     enum CodingKeys: String, CodingKey {
         case name = "trackName"
         case artist = "artistName"
-        case artworkURL = "artworkUrl30"
+        case id = "trackId"
+        case artworkURL = "artworkUrl100"
     }
 
     
@@ -25,6 +27,7 @@ struct Track: Codable {
         
         self.name = try values.decode(String.self, forKey: CodingKeys.name)
         self.artist = try values.decode(String.self, forKey: CodingKeys.artist)
+        self.id = try values.decode(Int.self, forKey: CodingKeys.id)
         self.artworkURL = try values.decode(URL.self, forKey: CodingKeys.artworkURL)
     }
 }
@@ -34,7 +37,7 @@ extension Track: Hashable {
         hasher.combine(name)
     }
     static func == (lhs: Track, rhs: Track) -> Bool {
-        return lhs.artworkURL == rhs.artworkURL
+        return lhs.id == rhs.id
     }
 }
 
