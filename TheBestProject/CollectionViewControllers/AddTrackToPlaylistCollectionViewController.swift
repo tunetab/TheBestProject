@@ -43,7 +43,7 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCollectionViewCell
-            cell.playListImageView.image = item.image
+            cell.playListImageView.image = item.image.getImage() ?? UIImage(systemName: "scribble")
             cell.playlistNameLabel.text = item.name
             return cell
         })
@@ -62,6 +62,10 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        if let playlist = dataSource.itemIdentifier(for: indexPath) {
+            Settings.shared.addTrack(self.track!, to: playlist)
+            performSegue(withIdentifier: "FinishAddingTrack", sender: nil)
+        }
     }
+
 }

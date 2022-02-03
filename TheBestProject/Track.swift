@@ -13,12 +13,14 @@ struct Track: Codable {
     var artist: String
     var id: Int
     var artworkURL: URL
+    var album: String
     
     enum CodingKeys: String, CodingKey {
         case name = "trackName"
         case artist = "artistName"
         case id = "trackId"
         case artworkURL = "artworkUrl100"
+        case album = "collectionName"
     }
 
     
@@ -29,6 +31,7 @@ struct Track: Codable {
         self.artist = try values.decode(String.self, forKey: CodingKeys.artist)
         self.id = try values.decode(Int.self, forKey: CodingKeys.id)
         self.artworkURL = try values.decode(URL.self, forKey: CodingKeys.artworkURL)
+        self.album = try values.decode(String.self, forKey: CodingKeys.album)
     }
 }
 

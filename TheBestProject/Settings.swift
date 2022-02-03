@@ -41,7 +41,7 @@ struct Settings {
         }
     }
     
-    func toggleFavorite(_ track: Track) {
+    mutating func toggleFavorite(_ track: Track) {
         var favorite = favoriteTracks
         
         if favorite.contains(track) {
@@ -49,6 +49,8 @@ struct Settings {
         } else {
             favorite.append(track)
         }
+        
+        favoriteTracks = favorite
     }
     
     /*
@@ -61,9 +63,20 @@ struct Settings {
         }
     }
     */
+    
+    mutating func addTrack(_ track: Track, to playlist: Playlist) {
+        var editingPlaylist = playlists.first { $0 == playlist }!
+        let index = playlists.firstIndex(where: { $0 == playlist })!
+        playlists.remove(at: index)
+        
+        editingPlaylist.tracks?.append(track)
+        
+        playlists.append(editingPlaylist)
+    }
+    
     var playlists: [Playlist] = [
-        Playlist(name: "Melancolic", image: UIImage(systemName: "eye")!),
-        Playlist(name: "Grunge", image: UIImage(systemName: "gear")!)
+        Playlist(name: "Melancolic", id: 1, date: Date(), image: Image(withImage: UIImage(systemName: "eye")!)),
+        Playlist(name: "Grunge", id: 2, date: Date(), image: Image(withImage: UIImage(systemName: "gear")!))
     ]
     
 }

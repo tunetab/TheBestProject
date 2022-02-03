@@ -14,6 +14,7 @@ struct User {
     //var image: UIImage
 }
 
+extension User: Codable { }
 
 var users: [User] = [
     User(name: "Sergio", bio: "You know, i'm something of a meloman myself"),
