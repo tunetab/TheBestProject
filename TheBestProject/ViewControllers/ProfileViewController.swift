@@ -38,6 +38,11 @@ class ProfileViewController: UIViewController {
         nameLabel.text = Settings.shared.currentUser.name
         bioLabel.text = Settings.shared.currentUser.bio
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         createDataSource()
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
@@ -47,7 +52,7 @@ class ProfileViewController: UIViewController {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCollectionViewCell
-            cell.playListImageView.image = item.image.getImage() ?? UIImage(systemName: "scribble")
+            cell.playListImageView.image = item.image?.getImage() ?? UIImage(systemName: "scribble")
             cell.playlistNameLabel.text = item.name
             return cell
         })
@@ -78,4 +83,15 @@ class ProfileViewController: UIViewController {
         }
     }
 
+    // MARK: unwindCreateNewPlaylist
+    @IBAction func unwindCreationOfPlaylist(segue: UIStoryboardSegue) {
+        guard segue.identifier == "saveUnwind",
+            let sourceViewController = segue.source as? CreatePlaylistViewController,
+            let item = sourceViewController.newPlaylist else { return }
+        
+        if let newPlaylist = item as? Playlist {
+            Settings.shared.playlists.append(newPlaylist)
+            self.dataSource.apply(self.snapshot)
+        }
+    }
 }

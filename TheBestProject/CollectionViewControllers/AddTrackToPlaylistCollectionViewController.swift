@@ -45,7 +45,7 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCollectionViewCell
-            cell.playListImageView.image = item.image.getImage() ?? UIImage(systemName: "scribble")
+            cell.playListImageView.image = item.image?.getImage() ?? UIImage(systemName: "scribble")
             cell.playlistNameLabel.text = item.name
             return cell
         })

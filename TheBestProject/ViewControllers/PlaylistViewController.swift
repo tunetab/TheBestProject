@@ -43,9 +43,14 @@ class PlaylistViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = playlist?.name
-        coverImageView.image = playlist?.image.getImage() ?? UIImage(systemName: "scribble")
+        coverImageView.image = playlist?.image?.getImage() ?? UIImage(systemName: "folder.fill")
         descriptionLabel.text = "Contain \(playlist?.tracks?.count ?? 0). Last change: \(playlist?.date ?? Date())"
         authorOfPlaylistLabel.text = "Made by \(playlist?.author.name ?? "господьБох")"
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         createDataSource()
         collectionView.setCollectionViewLayout(createLayout(), animated: false)

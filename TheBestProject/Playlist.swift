@@ -13,7 +13,7 @@ struct Playlist {
     var id: Int
     var date: Date
     var author: User
-    var image: Image
+    var image: Image?
     var tracks: [Track]?
 }
 

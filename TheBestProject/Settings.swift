@@ -75,8 +75,8 @@ struct Settings {
     }
     
     var playlists: [Playlist] = [
-        Playlist(name: "Melancolic", id: 1, date: Date(), author: User(name: "Sergio", bio: "You know, i'm something of a meloman myself"), image: Image(withImage: UIImage(systemName: "eye")!)),
-        Playlist(name: "Grunge",  id: 2, date: Date(), author: User(name: "Sergio", bio: "You know, i'm something of a meloman myself"), image: Image(withImage: UIImage(systemName: "gear")!))
+        Playlist(name: "Melancolic", id: 0, date: Date(), author: User(name: "Sergio", bio: "You know, i'm something of a meloman myself"), image: Image(withImage: UIImage(systemName: "eye")!)),
+        Playlist(name: "Grunge",  id: 1, date: Date(), author: User(name: "Sergio", bio: "You know, i'm something of a meloman myself"), image: Image(withImage: UIImage(systemName: "gear")!))
     ]
     
 }
