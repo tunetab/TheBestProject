@@ -30,14 +30,16 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
         
         return snapshot
     }
-    
+    // MARK: ViewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("addingController has got track: \(String(describing: track))")
         
         createDataSource()
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
-
+    //MARK: createDataSource()
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Playlist>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -49,7 +51,7 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
         })
         dataSource.apply(snapshot)
     }
-    
+    // MARK: createLayout()
     func createLayout() -> UICollectionViewLayout {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(63)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(65)), subitem: item, count: 1)
@@ -61,11 +63,21 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
+    // MARK: Adding Track to Playlist
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let playlist = dataSource.itemIdentifier(for: indexPath) {
             Settings.shared.addTrack(self.track!, to: playlist)
-            performSegue(withIdentifier: "FinishAddingTrack", sender: nil)
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "FinishAdding",
+            let cell = sender as? UICollectionViewCell else { return }
+        
+        if let indexPath = collectionView.indexPath(for: cell),
+            let playlist = dataSource.itemIdentifier(for: indexPath) {
+            Settings.shared.addTrack(self.track!, to: playlist)
+        }
+    }
 }

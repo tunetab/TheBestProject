@@ -158,10 +158,16 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
         guard segue.identifier == "AddTrackToPlaylists",
               let _ = segue.destination as? AddTrackToPlaylistCollectionViewController else { return }
         
-        if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
+        if let cell = sender as? TrackCollectionViewCell,
+            let indexPath = collectionView.indexPath(for: cell) {
             let chosenTrack = items[indexPath.row]
             AddingTrackSegue(track: chosenTrack)
         }
     }
     
+    // MARK: unwind Segue from PlaylistController
+    
+    @IBAction func unwindFromAddTrackToPlaylist(sender: UIStoryboardSegue) {
+        
+    }
 }

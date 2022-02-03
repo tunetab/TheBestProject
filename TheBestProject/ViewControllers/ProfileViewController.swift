@@ -22,8 +22,6 @@ class ProfileViewController: UIViewController {
     enum Section {
         case playlists
     }
-
-    
     var dataSource: UICollectionViewDiffableDataSource<Section, Playlist>!
     var snapshot: NSDiffableDataSourceSnapshot<Section, Playlist> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Playlist>()
@@ -33,7 +31,7 @@ class ProfileViewController: UIViewController {
         
         return snapshot
     }
-    
+    // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,29 +41,19 @@ class ProfileViewController: UIViewController {
         createDataSource()
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    // MARK: createDataSource()
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Playlist>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCollectionViewCell
-            cell.playListImageView.image = item.image
+            cell.playListImageView.image = item.image.getImage() ?? UIImage(systemName: "scribble")
             cell.playlistNameLabel.text = item.name
             return cell
         })
         dataSource.apply(snapshot)
     }
-
+    //MARK: createLayout()
     func createLayout() -> UICollectionViewLayout {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(63)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(65)), subitem: item, count: 1)
