@@ -62,4 +62,20 @@ class ProfileViewController: UIViewController {
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
+    //MARK: LookingClosureToPlaylists
+    
+    
+    @IBSegueAction func openPlaylist(_ coder: NSCoder, sender: Any?) -> PlaylistViewController? {
+        let playlistController = PlaylistViewController(coder: coder)
+        
+        if let cell = sender as? PlaylistCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
+            let selectedPlaylist = playlists[indexPath.item]
+            playlistController?.playlist = selectedPlaylist
+            return playlistController
+        } else {
+            return playlistController
+        }
+    }
+
 }

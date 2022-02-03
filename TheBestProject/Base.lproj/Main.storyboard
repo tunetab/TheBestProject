@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Favorite Songs-->
         <scene sceneID="z3R-bM-Mbc">
             <objects>
                 <collectionViewController id="TQI-Ov-3H9" customClass="HomePageCollectionViewController" customModule="TheBestProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,16 +25,58 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="on1-NT-2P8">
-                                <rect key="frame" x="23.5" y="0.0" width="367" height="73"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrackCell" id="oil-op-1hE" customClass="TrackCollectionViewCell" customModule="TheBestProject" customModuleProvider="target">
+                                <rect key="frame" x="33.5" y="0.0" width="347" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eu3-H1-eWw">
-                                    <rect key="frame" x="0.0" y="0.0" width="367" height="73"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="z9b-9i-Y9F">
+                                    <rect key="frame" x="0.0" y="0.0" width="347" height="70"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LOj-za-ed9">
+                                            <rect key="frame" x="0.0" y="0.0" width="347" height="70"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PInk_Floyd_-_The_Piper_at_the_Gates_of_Dawn" translatesAutoresizingMaskIntoConstraints="NO" id="akr-HG-v8B">
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="akr-HG-v8B" secondAttribute="height" multiplier="1:1" id="l2B-FO-CMO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NLN-uU-gfc">
+                                                    <rect key="frame" x="80" y="0.0" width="267" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="trackNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MS-0C-Ula">
+                                                            <rect key="frame" x="0.0" y="0.0" width="267" height="42"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artistLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-VF-q3v">
+                                                            <rect key="frame" x="0.0" y="42" width="267" height="28"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="4MS-0C-Ula" firstAttribute="height" secondItem="KN1-VF-q3v" secondAttribute="height" multiplier="1.5" id="8KM-jk-cYO"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="LOj-za-ed9" firstAttribute="top" secondItem="z9b-9i-Y9F" secondAttribute="top" id="65t-aE-Hht"/>
+                                        <constraint firstAttribute="bottom" secondItem="LOj-za-ed9" secondAttribute="bottom" id="IYy-cF-BgT"/>
+                                        <constraint firstAttribute="trailing" secondItem="LOj-za-ed9" secondAttribute="trailing" id="UTp-Vq-oUL"/>
+                                        <constraint firstItem="LOj-za-ed9" firstAttribute="leading" secondItem="z9b-9i-Y9F" secondAttribute="leading" id="ggf-8W-cEp"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="367" height="73"/>
+                                <size key="customSize" width="347" height="70"/>
                                 <connections>
-                                    <segue destination="t2v-Vh-Rnv" kind="presentation" id="HGy-mF-5zC"/>
+                                    <outlet property="albumCoverImageView" destination="akr-HG-v8B" id="QSN-7K-YYn"/>
+                                    <outlet property="artistLabel" destination="KN1-VF-q3v" id="VCo-yz-w3d"/>
+                                    <outlet property="trackNameLabel" destination="4MS-0C-Ula" id="Vbp-Ye-4ih"/>
+                                    <segue destination="t2v-Vh-Rnv" kind="showDetail" id="9ef-xK-OdV"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -43,7 +85,7 @@
                             <outlet property="delegate" destination="TQI-Ov-3H9" id="Lef-vJ-4Uk"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Home" id="zeM-nH-H6G"/>
+                    <navigationItem key="navigationItem" title="Favorite Songs" id="zeM-nH-H6G"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lh-e2-LEa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -127,7 +169,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="TS6-as-6mm" kind="showDetail" identifier="AddTrackToPlaylists" id="vBf-Cn-Bi1"/>
+                        <segue destination="TS6-as-6mm" kind="showDetail" identifier="AddTrackToPlaylists" destinationCreationSelector="addTrack:sender:" id="vBf-Cn-Bi1"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Qg-EE-gxs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -207,7 +249,7 @@
                                         <connections>
                                             <outlet property="playListImageView" destination="bWU-kH-4As" id="leF-cf-u5R"/>
                                             <outlet property="playlistNameLabel" destination="7eu-ee-EXa" id="p4h-MS-jFy"/>
-                                            <segue destination="cv9-jl-sB7" kind="show" id="C4M-0O-0e1"/>
+                                            <segue destination="cv9-jl-sB7" kind="show" identifier="showPlaylist" destinationCreationSelector="openPlaylist:sender:" id="C4M-0O-0e1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -454,7 +496,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="cm9-5b-xgs" kind="relationship" relationship="rootViewController" id="V4f-Ji-QwK"/>
+                        <segue destination="cm9-5b-xgs" kind="relationship" relationship="rootViewController" destinationCreationSelector="openPlaylist:sender:" id="V4f-Ji-QwK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRc-KJ-QXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -476,13 +518,13 @@
                                     <constraint firstAttribute="width" secondItem="hia-FN-amr" secondAttribute="height" multiplier="1:1" id="TRP-nS-2pR"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authors included" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbV-KY-0Hx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbV-KY-0Hx">
                                 <rect key="frame" x="12" y="311" width="390" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9v-YO-tNb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9v-YO-tNb">
                                 <rect key="frame" x="12" y="339.5" width="390" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -572,6 +614,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PlaylistTitle" id="4nI-ej-Iew"/>
+                    <connections>
+                        <outlet property="authorOfPlaylistLabel" destination="Q9v-YO-tNb" id="TJH-Cf-WCe"/>
+                        <outlet property="collectionView" destination="XF0-Bi-2l2" id="Zht-Sw-lF8"/>
+                        <outlet property="coverImageView" destination="hia-FN-amr" id="aO4-rp-Oiu"/>
+                        <outlet property="descriptionLabel" destination="mbV-KY-0Hx" id="A66-NL-85X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R9p-k5-jpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

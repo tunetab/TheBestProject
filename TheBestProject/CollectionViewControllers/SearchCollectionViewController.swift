@@ -155,11 +155,9 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "AddTrackToPlaylists",
-              let _ = segue.destination as? AddTrackToPlaylistCollectionViewController else { return }
+        guard segue.identifier == "AddTrackToPlaylists" else { return }
         
-        if let cell = sender as? TrackCollectionViewCell,
-            let indexPath = collectionView.indexPath(for: cell) {
+        if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
             let chosenTrack = items[indexPath.row]
             AddingTrackSegue(track: chosenTrack)
         }
