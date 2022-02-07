@@ -9,11 +9,12 @@ import Foundation
 
 struct Settings {
     
-    let currentUser = User(name: "Sergio", bio: "You know, i'm something of a meloman myself")
+    var currentUser = User(name: "Sergio", bio: "You know, i'm something of a meloman myself")
     
     enum Setting {
         static let favoriteTracks = "favoriteHabits"
         static let playlists = "playlists"
+        static let currentUser = "cirrentUser"
     }
     
     static var shared = Settings()
@@ -30,8 +31,8 @@ struct Settings {
               let data = string.data(using: .utf8) else { return nil }
         return try! JSONDecoder().decode(T.self, from: data)
     }
-
     
+    // MARK: favoriteTracks
     var favoriteTracks: [Track] {
         get {
             unarchiveJSON(key: Setting.favoriteTracks) ?? []
@@ -53,7 +54,7 @@ struct Settings {
         favoriteTracks = favorite
     }
     
-    /*
+    // MARK: editing playlist methods
     var playlists: [Playlist] {
         get {
             unarchiveJSON(key: Setting.playlists) ?? []
@@ -62,21 +63,58 @@ struct Settings {
             archiveJSON(value: newValue, key: Setting.playlists)
         }
     }
-    */
+    
+    mutating func createPlaylist(withName name: String?) {
+        let playlistCount = playlists.count
+        
+        var playlistID = 0
+        repeat {
+            playlistID += 1
+        } while playlists.filter { $0.id == playlistID } != []
+        
+        let newPlaylist = Playlist(name: name ?? "Playlist #\(playlistCount + 1)", id: playlistID, date: Date(), author: currentUser, image: Image(withImage: UIImage(systemName: "scribble")!), tracks: [])
+        
+        playlists.append(newPlaylist)
+    }
     
     mutating func addTrack(_ track: Track, to playlist: Playlist) {
         var editingPlaylist = playlists.first { $0 == playlist }!
         let index = playlists.firstIndex(where: { $0 == playlist })!
         playlists.remove(at: index)
         
-        editingPlaylist.tracks?.append(track)
+        if !editingPlaylist.tracks.contains(track) {
+            editingPlaylist.tracks.append(track)
+            editingPlaylist.date = Date()
+        } else {
+            print("Track is already exist in the playlist")
+        }
+        playlists.append(editingPlaylist)
+    }
+    
+    mutating func editCover(_ image: UIImage, to playlist: Playlist) {
+        var editingPlaylist = playlists.first { $0 == playlist }!
+        let index = playlists.firstIndex(where: { $0 == playlist })!
+        playlists.remove(at: index)
+        
+        editingPlaylist.image = Image(withImage: image)
         
         playlists.append(editingPlaylist)
     }
     
-    var playlists: [Playlist] = [
-        Playlist(name: "Melancolic", id: 0, date: Date(), author: User(name: "Sergio", bio: "You know, i'm something of a meloman myself"), image: Image(withImage: UIImage(systemName: "eye")!)),
-        Playlist(name: "Grunge",  id: 1, date: Date(), author: User(name: "Sergio", bio: "You know, i'm something of a meloman myself"), image: Image(withImage: UIImage(systemName: "gear")!))
-    ]
+    mutating func deletePlaylist(_ playlist: Playlist) {
+        let index = playlists.firstIndex(where: { $0 == playlist })!
+        playlists.remove(at: index)
+    }
     
+    // MARK: Users methods
+    /*
+    var currentUser: User {
+        get {
+            unarchiveJSON(key: Setting.currentUser) as! User
+        }
+        set {
+            archiveJSON(value: newValue, key: Setting.currentUser)
+        }
+    }
+    */
 }

@@ -18,9 +18,8 @@ class CreatePlaylistViewController: UIViewController {
     }
     
     @IBAction func buttonTapped(_ sender: Any?) {
-        let playlistCount = Settings.shared.playlists.count
+        Settings.shared.createPlaylist(withName: textField.text)
         
-        newPlaylist = Playlist(name: textField.text ?? "Playlist #\(playlistCount)", id: playlistCount, date: Date(), author: Settings.shared.currentUser)
     }
     
 }

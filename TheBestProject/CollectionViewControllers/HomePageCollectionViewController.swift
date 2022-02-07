@@ -15,7 +15,7 @@ class HomePageCollectionViewController: UICollectionViewController {
         return Settings.shared.favoriteTracks
     }
     
-    let storeItemController = StoreItemController()
+    let fetchingItemController = FetchingItemsController()
     
     enum Section {
         case tracks
@@ -36,6 +36,8 @@ class HomePageCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createDataSource()
+        collectionView.collectionViewLayout = createLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +60,7 @@ class HomePageCollectionViewController: UICollectionViewController {
             self.imageLoadTasks[indexPath]?.cancel()
             self.imageLoadTasks[indexPath] = Task {
                 do {
-                    let image = try await self.storeItemController.fetchImage(from: item.artworkURL)
+                    let image = try await self.fetchingItemController.fetchImage(from: item.artworkURL)
                     cell.albumCoverImageView.image = image
                 } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
                     // ignore cancellation errors
@@ -101,6 +103,18 @@ class HomePageCollectionViewController: UICollectionViewController {
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [favoriteToggle])
         }
         return config
+    }
+    
+    @IBSegueAction func openTrack(_ coder: NSCoder, sender: Any?) -> PlayerViewController? {
+        let playerVC = PlayerViewController(coder: coder)
+        
+        if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
+            let track = favoriteTracks[indexPath.item]
+            playerVC?.currentTrack = track
+            return playerVC
+        } else {
+            return playerVC
+        }
     }
 
 }

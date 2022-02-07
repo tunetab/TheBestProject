@@ -11,7 +11,7 @@ struct SearchResponse: Codable {
     let results: [Track]
 }
 
-class StoreItemController {
+class FetchingItemsController {
     enum StoreItemError: Error, LocalizedError {
         case itemsNotFound
         case imageDataMissing

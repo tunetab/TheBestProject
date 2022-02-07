@@ -34,7 +34,10 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("addingController has got track: \(String(describing: track))")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         createDataSource()
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
@@ -45,7 +48,7 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCollectionViewCell
-            cell.playListImageView.image = item.image?.getImage() ?? UIImage(systemName: "scribble")
+            cell.playListImageView.image = item.image.getImage()
             cell.playlistNameLabel.text = item.name
             return cell
         })
@@ -68,16 +71,15 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let playlist = dataSource.itemIdentifier(for: indexPath) {
             Settings.shared.addTrack(self.track!, to: playlist)
+            navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @IBAction func unwindFromCreatingToAdding(segue: UIStoryboardSegue) {
+        guard segue.identifier == "saveUnwind",
+            let _ = segue.source as? CreatePlaylistViewController else { return }
+        
+        self.dataSource.apply(self.snapshot)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "FinishAdding",
-            let cell = sender as? UICollectionViewCell else { return }
-        
-        if let indexPath = collectionView.indexPath(for: cell),
-            let playlist = dataSource.itemIdentifier(for: indexPath) {
-            Settings.shared.addTrack(self.track!, to: playlist)
-        }
-    }
 }

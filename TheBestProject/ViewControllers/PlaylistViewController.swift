@@ -7,21 +7,20 @@
 
 import UIKit
 
-class PlaylistViewController: UIViewController {
-    
+class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     var playlist: Playlist?
     
     var tracks: [Track] {
         return playlist?.tracks ?? []
     }
     
-    let storeItemController = StoreItemController()
+    let fetchingItemController = FetchingItemsController()
 
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var authorOfPlaylistLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     
     enum Section {
         case tracks
@@ -42,11 +41,23 @@ class PlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = playlist?.name
-        coverImageView.image = playlist?.image?.getImage() ?? UIImage(systemName: "folder.fill")
-        descriptionLabel.text = "Contain \(playlist?.tracks?.count ?? 0). Last change: \(playlist?.date ?? Date())"
-        authorOfPlaylistLabel.text = "Made by \(playlist?.author.name ?? "господьБох")"
+        navigationItem.title = playlist!.name
+        coverImageView.image = playlist!.image.getImage()
+        descriptionLabel.text = "Contain \(playlist!.tracks.count). Last change: \(playlist!.date.formatted(date: .abbreviated, time: .omitted))"
+        authorOfPlaylistLabel.text = "Made by \(playlist!.author.name)"
         
+        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill")) { (action) in
+            self.showDeleteAlert()
+        }
+        
+        let menuBarButton = UIBarButtonItem(title: "Settings", image: UIImage(systemName:"ellipsis"), primaryAction: nil, menu: UIMenu(title: "", children: [delete]))
+            
+        self.navigationItem.rightBarButtonItem = menuBarButton
+        
+        coverImageView.isUserInteractionEnabled = true
+                
+        let interaction = UIContextMenuInteraction(delegate: self)
+        coverImageView.addInteraction(interaction)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +79,7 @@ class PlaylistViewController: UIViewController {
             self.imageLoadTasks[indexPath]?.cancel()
             self.imageLoadTasks[indexPath] = Task {
                 do {
-                    let image = try await self.storeItemController.fetchImage(from: item.artworkURL)
+                    let image = try await self.fetchingItemController.fetchImage(from: item.artworkURL)
                     cell.albumCoverImageView.image = image
                 } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
                     // ignore cancellation errors
@@ -97,4 +108,66 @@ class PlaylistViewController: UIViewController {
             
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
+    // MARK: contextMenu
+    func showDeleteAlert() {
+        let alertController = UIAlertController(title: "Are You sure to delete playlist \(self.playlist!.name)?", message: nil, preferredStyle: .alert)
+        alertController.addAction(.init(title: "Yes", style: .cancel, handler: { [weak self] _ in
+            guard let self = self else { return }
+            Settings.shared.deletePlaylist(self.playlist!)
+            self.navigationController?.popViewController(animated: true)
+        }) )
+        alertController.addAction(.init(title: "Cancel", style: .default))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { actions -> UIMenu in
+            let edit = UIAction(title: "Edit Cover", image: nil) { (action) in
+                self.showMediaAlert()
+            }
+            return UIMenu(title: "", children: [edit])
+        }
+        return configuration
+    }
+    
+    func showMediaAlert() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            alertController.addAction(cameraAction)
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { (action) in
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            alertController.addAction(photoLibraryAction)
+        }
+        
+        alertController.popoverPresentationController?.sourceView = self.coverImageView
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        
+        Settings.shared.editCover(selectedImage, to: self.playlist!)
+        
+        self.dataSource.apply(self.snapshot)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

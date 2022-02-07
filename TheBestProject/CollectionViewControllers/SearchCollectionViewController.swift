@@ -12,7 +12,7 @@ private let reuseIdentifier = "TrackCell"
 class SearchCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
     
     let searchController = UISearchController()
-    let storeItemController = StoreItemController()
+    let fetchingItemController = FetchingItemsController()
     
     var items = [Track]()
     
@@ -40,6 +40,11 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
         searchController.searchBar.showsScopeBar = true
         searchController.searchBar.scopeButtonTitles = ["Music", "Users"]
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         createDataSource()
         collectionView.collectionViewLayout = createLayout()
     }
@@ -64,6 +69,8 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
         searchTask?.cancel()
         searchTask = Task {
             if !searchTerm.isEmpty {
+                
+                
                 let query = [
                     "term": searchTerm,
                     "media": "music",
@@ -72,7 +79,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
                 ]
                 
                 do {
-                    let items = try await storeItemController.fetchItems(matching: query)
+                    let items = try await fetchingItemController.fetchItems(matching: query)
                     if searchTerm == self.searchController.searchBar.text {
                         self.items = items
                     }
@@ -82,6 +89,8 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
                     print(error)
                 }
                 await dataSource.apply(itemsSnapshot, animatingDifferences: true)
+                
+                
             } else {
                 await dataSource.apply(itemsSnapshot, animatingDifferences: true)
             }
@@ -102,7 +111,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
                 self.imageLoadTasks[indexPath]?.cancel()
                 self.imageLoadTasks[indexPath] = Task {
                     do {
-                        let image = try await self.storeItemController.fetchImage(from: item.artworkURL)
+                        let image = try await self.fetchingItemController.fetchImage(from: item.artworkURL)
                         cell.albumCoverImageView.image = image
                     } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
                         // ignore cancellation errors
@@ -133,7 +142,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     
     // MARK: contextMenuConfig
     
-    private func AddingTrackSegue(track: Track) {
+    private func addingTrackSegue(track: Track) {
         performSegue(withIdentifier: "AddTrackToPlaylists", sender: track)
     }
     
@@ -146,7 +155,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
             }
             
             let addToPlaylist = UIAction(title: "Add to Playlist") { [weak self] (action) in
-                self?.AddingTrackSegue(track: item)
+                self?.addingTrackSegue(track: item)
             }
             
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [favoriteToggle, addToPlaylist])
@@ -156,17 +165,16 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "AddTrackToPlaylists",
-              let _ = segue.destination as? AddTrackToPlaylistCollectionViewController else { return }
+              let choosePlaylistVC = segue.destination as? AddTrackToPlaylistCollectionViewController else { return }
         
-        if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
-            let chosenTrack = items[indexPath.row]
-            AddingTrackSegue(track: chosenTrack)
+        if let trackToAdd = sender as? Track {
+            choosePlaylistVC.track = trackToAdd
         }
     }
     
     // MARK: unwind Segue from PlaylistController
     
-    @IBAction func unwindFromAddTrackToPlaylist(sender: UIStoryboardSegue) {
-        
+    @IBAction func unwindFromAddTrackToPlaylist(segue: UIStoryboardSegue) {
+
     }
 }

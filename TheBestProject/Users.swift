@@ -11,7 +11,7 @@ import UIKit
 struct User {
     var name: String
     var bio: String
-    //var image: UIImage
+    var image: Image?
 }
 
 extension User: Codable { }
