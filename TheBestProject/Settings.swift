@@ -88,6 +88,7 @@ struct Settings {
         } else {
             print("Track is already exist in the playlist")
         }
+        
         playlists.append(editingPlaylist)
     }
     
@@ -104,6 +105,18 @@ struct Settings {
     mutating func deletePlaylist(_ playlist: Playlist) {
         let index = playlists.firstIndex(where: { $0 == playlist })!
         playlists.remove(at: index)
+    }
+     
+    mutating func reoderTracks(_ playlist: Playlist, from: IndexPath, to: IndexPath){
+        var editingPlaylist = playlists.first { $0 == playlist }!
+        let index = playlists.firstIndex(where: { $0 == playlist })!
+        playlists.remove(at: index)
+        
+        let movedTrack = editingPlaylist.tracks.remove(at: from.item)
+        editingPlaylist.tracks.insert(movedTrack, at: to.item)
+        editingPlaylist.date = Date()
+        
+        playlists.append(editingPlaylist)
     }
     
     // MARK: Users methods

@@ -12,6 +12,8 @@ class PlayerViewController: UIViewController {
     
     var currentTrack: Track?
     
+    var query: [Track] = []
+    
     let fetchingItemController = FetchingItemsController()
 
     @IBOutlet weak var albumCoverImageView: UIImageView!
@@ -32,9 +34,37 @@ class PlayerViewController: UIViewController {
     //MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateView()
+        
+    }
+    
+    //MARK: updateView()
+    
+    func updateView() {
+        
+        query = getQuery()
         updateInfoView()
         initAudioPlayer()
+        if player!.rate == 0 {
+            player?.play()
+            playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: UIControl.State.normal)
+        }
+    }
+    
+    // MARK: getQuery()
+    func getQuery() -> [Track] {
+        let tracks = Settings.shared.favoriteTracks
+        var query = [Track]()
+        let index = tracks.firstIndex(of: currentTrack!)!
+        
+        for i in index+1..<tracks.count {
+            query.append(tracks[i])
+        }
+        
+        for i in 0..<index {
+            query.append(tracks[i])
+        }
+        return query
     }
     
     //MARK: updateInfoView()
@@ -65,12 +95,12 @@ class PlayerViewController: UIViewController {
         
         self.trackSlider.minimumValue = 0
         
-        let duration : CMTime = playerItem.asset.duration
-        let seconds : Float64 = CMTimeGetSeconds(duration)
+        let duration: CMTime = playerItem.asset.duration
+        let seconds: Float64 = CMTimeGetSeconds(duration)
         self.trackDurationLabel.text = self.stringFromTimeInterval(interval: seconds)
         
-        let currentDuration : CMTime = playerItem.currentTime()
-        let currentSeconds : Float64 = CMTimeGetSeconds(currentDuration)
+        let currentDuration: CMTime = playerItem.currentTime()
+        let currentSeconds: Float64 = CMTimeGetSeconds(currentDuration)
         self.currentTimeLabel.text = self.stringFromTimeInterval(interval: currentSeconds)
         
         self.trackSlider.maximumValue = Float(seconds)
@@ -84,15 +114,15 @@ class PlayerViewController: UIViewController {
             }
             let playbackLikelyToKeepUp = self.player?.currentItem?.isPlaybackLikelyToKeepUp
             if playbackLikelyToKeepUp == false{
-                print("IsBuffering")
                 self.playButton.isHidden = true
             } else {
-                print("Buffering completed")
                 self.playButton.isHidden = false
             }
         }
         
         self.trackSlider.addTarget(self, action: #selector(trackSliderValueChanged(_:)), for: .valueChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.finishedPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
     }
     // MARK: Helping methods
@@ -107,21 +137,32 @@ class PlayerViewController: UIViewController {
         let seconds : Int64 = Int64(trackSlider.value)
         let targetTime: CMTime = CMTimeMake(value: seconds, timescale: 1)
         player!.seek(to: targetTime)
-        if player!.rate == 0 {
-            player?.play()
-        }
+    }
+    
+    @objc func finishedPlaying( _ myNotification:NSNotification) {
+        playButton.setImage(UIImage(named: "play"), for: UIControl.State.normal)
+        currentTrack = query[0]
+        updateView()
     }
     
     // MARK: Button Actions
     @IBAction func playButtonTapped(_ sender: Any) {
         if player?.rate == 0 {
             player!.play()
-            self.playButton.isHidden = true
             playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: UIControl.State.normal)
         } else {
             player!.pause()
             playButton.setImage(UIImage(systemName: "play.circle.fill"), for: UIControl.State.normal)
         }
+    }
+    @IBAction func forwardButtonTapped(_ sender: Any) {
+        currentTrack = query[0]
+        updateView()
+    }
+    
+    @IBAction func backwardButtonTapped(_ sender: Any) {
+        currentTrack = query.last
+        updateView()
     }
     
 }

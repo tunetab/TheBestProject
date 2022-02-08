@@ -18,6 +18,7 @@
 		EC71FB5927ABA57500C4AEBC /* AddTrackToPlaylistCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */; };
 		EC71FB5B27ABB9A800C4AEBC /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71FB5A27ABB9A800C4AEBC /* PlaylistViewController.swift */; };
 		EC748A5427B0CA7400192BA2 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC748A5327B0CA7400192BA2 /* PlayerViewController.swift */; };
+		EC748A5627B0F44D00192BA2 /* QueryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC748A5527B0F44D00192BA2 /* QueryCollectionViewController.swift */; };
 		EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */; };
 		EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */; };
 		EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */; };
@@ -66,6 +67,7 @@
 		EC71FB5627AB8A1F00C4AEBC /* MyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyExtensions.swift; sourceTree = "<group>"; };
 		EC71FB5A27ABB9A800C4AEBC /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		EC748A5327B0CA7400192BA2 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = ../PlayerViewController.swift; sourceTree = "<group>"; };
+		EC748A5527B0F44D00192BA2 /* QueryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */,
 				EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */,
 				EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */,
+				EC748A5527B0F44D00192BA2 /* QueryCollectionViewController.swift */,
 			);
 			path = CollectionViewControllers;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */,
 				EC7D5BB527A29F77006FD85A /* SceneDelegate.swift in Sources */,
 				EC9BA91527A7DE5100426468 /* APIService.swift in Sources */,
+				EC748A5627B0F44D00192BA2 /* QueryCollectionViewController.swift in Sources */,
 				EC71FB5727AB8A1F00C4AEBC /* MyExtensions.swift in Sources */,
 				EC9BA91127A7DE3600426468 /* Artist.swift in Sources */,
 			);

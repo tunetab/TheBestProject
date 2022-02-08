@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate {
 
     var playlist: Playlist?
     
@@ -40,22 +40,24 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
     // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.collectionView.delegate = self
+        
+        //navigationItem
         navigationItem.title = playlist!.name
         coverImageView.image = playlist!.image.getImage()
         descriptionLabel.text = "Contain \(playlist!.tracks.count). Last change: \(playlist!.date.formatted(date: .abbreviated, time: .omitted))"
         authorOfPlaylistLabel.text = "Made by \(playlist!.author.name)"
         
+        //context Menu For CollectionView
         let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill")) { (action) in
             self.showDeleteAlert()
         }
-        
         let menuBarButton = UIBarButtonItem(title: "Settings", image: UIImage(systemName:"ellipsis"), primaryAction: nil, menu: UIMenu(title: "", children: [delete]))
-            
         self.navigationItem.rightBarButtonItem = menuBarButton
         
+        // contxt Menu For Profile Image
         coverImageView.isUserInteractionEnabled = true
-                
         let interaction = UIContextMenuInteraction(delegate: self)
         coverImageView.addInteraction(interaction)
     }
@@ -75,7 +77,7 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCell", for: indexPath) as! TrackCollectionViewCell
             cell.trackNameLabel.text = item.name
             cell.artistLabel.text = item.artist
-            
+                        
             self.imageLoadTasks[indexPath]?.cancel()
             self.imageLoadTasks[indexPath] = Task {
                 do {
@@ -110,17 +112,6 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
     }
     
     // MARK: contextMenu
-    func showDeleteAlert() {
-        let alertController = UIAlertController(title: "Are You sure to delete playlist \(self.playlist!.name)?", message: nil, preferredStyle: .alert)
-        alertController.addAction(.init(title: "Yes", style: .cancel, handler: { [weak self] _ in
-            guard let self = self else { return }
-            Settings.shared.deletePlaylist(self.playlist!)
-            self.navigationController?.popViewController(animated: true)
-        }) )
-        alertController.addAction(.init(title: "Cancel", style: .default))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { actions -> UIMenu in
             let edit = UIAction(title: "Edit Cover", image: nil) { (action) in
@@ -131,6 +122,19 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         return configuration
     }
     
+    // MARK: deleteAlert()
+    func showDeleteAlert() {
+        let alertController = UIAlertController(title: "Are You sure to delete playlist \(self.playlist!.name)?", message: nil, preferredStyle: .alert)
+        alertController.addAction(.init(title: "Yes", style: .cancel, handler: { [weak self] _ in
+            guard let self = self else { return }
+            Settings.shared.deletePlaylist(self.playlist!)
+            self.navigationController?.popViewController(animated: true)
+        }) )
+        alertController.addAction(.init(title: "Cancel", style: .default))
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    //MARK: mediaAlert()
     func showMediaAlert() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -159,7 +163,7 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         alertController.popoverPresentationController?.sourceView = self.coverImageView
         present(alertController, animated: true, completion: nil)
     }
-    
+    //MARK: pickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
@@ -169,5 +173,9 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         
         dismiss(animated: true, completion: nil)
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        Settings.shared.reoderTracks(self.playlist!, from: sourceIndexPath, to: destinationIndexPath)
+    }
+
 }
