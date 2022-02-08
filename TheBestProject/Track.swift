@@ -25,7 +25,6 @@ struct Track: Codable {
         case previewUrl = "previewUrl"
     }
 
-    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         

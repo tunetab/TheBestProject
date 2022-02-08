@@ -18,8 +18,11 @@ class CreatePlaylistViewController: UIViewController {
     }
     
     @IBAction func buttonTapped(_ sender: Any?) {
-        Settings.shared.createPlaylist(withName: textField.text)
-        
+        if let playlistName = textField.text, !playlistName.isEmpty {
+            Settings.shared.createPlaylist(withName: playlistName)
+        } else {
+            Settings.shared.createPlaylist(withName: nil)
+        }
     }
     
 }

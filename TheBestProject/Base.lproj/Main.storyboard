@@ -223,7 +223,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="348" height="99"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.note.list" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bWU-kH-4As" userLabel="ItemImageView">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.note.list" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bWU-kH-4As" userLabel="ItemImageView">
                                                     <rect key="frame" x="0.0" y="0.5" width="99" height="98"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bWU-kH-4As" secondAttribute="height" multiplier="1:1" id="lap-Ev-0iL"/>
@@ -291,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOr-So-Cw9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1198.5507246376812" y="-24.107142857142858"/>
+            <point key="canvasLocation" x="1194" y="-22"/>
         </scene>
         <!--Create Playlist View Controller-->
         <scene sceneID="E0v-ne-psU">
@@ -349,7 +349,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbQ-bs-M0R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="3UI-hX-4fP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1971" y="340"/>
+            <point key="canvasLocation" x="1965" y="344"/>
         </scene>
         <!--Search-->
         <scene sceneID="5Il-dR-Rj0">
@@ -387,7 +387,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjC-KX-yAX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1200" y="-755"/>
+            <point key="canvasLocation" x="1194" y="-753"/>
         </scene>
         <!--Home-->
         <scene sceneID="aIt-bo-AKz">
@@ -561,9 +561,6 @@
                                                 <rect key="frame" x="177" y="0.0" width="177" height="31"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="list.dash" catalog="system"/>
-                                                <connections>
-                                                    <segue destination="Rhw-Ms-Mss" kind="showDetail" id="XtP-DE-yFr"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -606,40 +603,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="juC-vz-pK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-549" y="704"/>
-        </scene>
-        <!--Query Collection View Controller-->
-        <scene sceneID="Gbc-DR-wCX">
-            <objects>
-                <collectionViewController id="Rhw-Ms-Mss" customClass="QueryCollectionViewController" customModule="TheBestProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="fqg-a5-25b">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VDM-Ad-dnm">
-                            <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UDR-i1-SxO">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FUw-hR-U9R">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="Rhw-Ms-Mss" id="13L-QE-FpX"/>
-                            <outlet property="delegate" destination="Rhw-Ms-Mss" id="lzL-XA-02P"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bYl-eP-6D1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-549" y="1434"/>
         </scene>
         <!--Choose Playlist-->
         <scene sceneID="rt7-wi-vSu">
@@ -719,7 +682,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.note.list" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hia-FN-amr">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.note.list" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hia-FN-amr">
                                 <rect key="frame" x="107" y="103.5" width="200" height="199"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="JsP-1H-dIN"/>
@@ -831,7 +794,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R9p-k5-jpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1199" y="704"/>
+            <point key="canvasLocation" x="1194" y="706"/>
         </scene>
         <!--Create Playlist View Controller-->
         <scene sceneID="Wi2-Ai-Tdv">
@@ -889,7 +852,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sm8-VR-HwF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="cMN-0r-keD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="325" y="1434"/>
+            <point key="canvasLocation" x="325" y="1420"/>
         </scene>
     </scenes>
     <resources>

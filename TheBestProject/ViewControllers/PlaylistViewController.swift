@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate {
+class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var playlist: Playlist?
     
@@ -40,15 +40,7 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
     // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.collectionView.delegate = self
-        
-        //navigationItem
-        navigationItem.title = playlist!.name
-        coverImageView.image = playlist!.image.getImage()
-        descriptionLabel.text = "Contain \(playlist!.tracks.count). Last change: \(playlist!.date.formatted(date: .abbreviated, time: .omitted))"
-        authorOfPlaylistLabel.text = "Made by \(playlist!.author.name)"
-        
+    
         //context Menu For CollectionView
         let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill")) { (action) in
             self.showDeleteAlert()
@@ -60,10 +52,16 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         coverImageView.isUserInteractionEnabled = true
         let interaction = UIContextMenuInteraction(delegate: self)
         coverImageView.addInteraction(interaction)
+        
+        updateView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func updateView() {
+        
+        navigationItem.title = playlist!.name
+        coverImageView.image = playlist!.image.getImage()
+        descriptionLabel.text = "Contain \(playlist!.tracks.count). Last change: \(playlist!.date.formatted(date: .abbreviated, time: .omitted))"
+        authorOfPlaylistLabel.text = "Made by \(playlist!.author.name)"
         
         createDataSource()
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
@@ -169,13 +167,9 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         
         Settings.shared.editCover(selectedImage, to: self.playlist!)
         
-        self.dataSource.apply(self.snapshot)
+        self.updateView()
         
         dismiss(animated: true, completion: nil)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        Settings.shared.reoderTracks(self.playlist!, from: sourceIndexPath, to: destinationIndexPath)
     }
 
 }

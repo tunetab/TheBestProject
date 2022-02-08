@@ -39,7 +39,6 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
         searchController.automaticallyShowsSearchResultsController = true
         searchController.searchBar.showsScopeBar = true
         searchController.searchBar.scopeButtonTitles = ["Music", "Users"]
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,9 +57,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     
     // MARK: fetchMatchingItems()
     @objc func fetchMatchingItems() {
-        
         self.items = []
-                
         let searchTerm = searchController.searchBar.text ?? ""
         
         imageLoadTasks.values.forEach { task in task.cancel()}
@@ -69,15 +66,12 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
         searchTask?.cancel()
         searchTask = Task {
             if !searchTerm.isEmpty {
-                
-                
                 let query = [
                     "term": searchTerm,
                     "media": "music",
                     "lang": "en_us",
                     "limit": "50"
                 ]
-                
                 do {
                     let items = try await fetchingItemController.fetchItems(matching: query)
                     if searchTerm == self.searchController.searchBar.text {

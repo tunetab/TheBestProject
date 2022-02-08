@@ -18,7 +18,6 @@
 		EC71FB5927ABA57500C4AEBC /* AddTrackToPlaylistCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */; };
 		EC71FB5B27ABB9A800C4AEBC /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71FB5A27ABB9A800C4AEBC /* PlaylistViewController.swift */; };
 		EC748A5427B0CA7400192BA2 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC748A5327B0CA7400192BA2 /* PlayerViewController.swift */; };
-		EC748A5627B0F44D00192BA2 /* QueryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC748A5527B0F44D00192BA2 /* QueryCollectionViewController.swift */; };
 		EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */; };
 		EC7970C427A3A30700EC61BB /* HomePageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */; };
 		EC7970C627A3A31B00EC61BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */; };
@@ -31,9 +30,6 @@
 		EC7D5BD427A29F7A006FD85A /* TheBestProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BD327A29F7A006FD85A /* TheBestProjectUITests.swift */; };
 		EC7D5BD627A29F7A006FD85A /* TheBestProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D5BD527A29F7A006FD85A /* TheBestProjectUITestsLaunchTests.swift */; };
 		EC9BA90F27A7DE2600426468 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA90E27A7DE2600426468 /* Settings.swift */; };
-		EC9BA91127A7DE3600426468 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91027A7DE3600426468 /* Artist.swift */; };
-		EC9BA91527A7DE5100426468 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91327A7DE5100426468 /* APIService.swift */; };
-		EC9BA91627A7DE5100426468 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91427A7DE5100426468 /* APIRequest.swift */; };
 		EC9BA91827A7DF6900426468 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9BA91727A7DF6900426468 /* Playlist.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +63,6 @@
 		EC71FB5627AB8A1F00C4AEBC /* MyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyExtensions.swift; sourceTree = "<group>"; };
 		EC71FB5A27ABB9A800C4AEBC /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		EC748A5327B0CA7400192BA2 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = ../PlayerViewController.swift; sourceTree = "<group>"; };
-		EC748A5527B0F44D00192BA2 /* QueryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -84,9 +79,6 @@
 		EC7D5BD327A29F7A006FD85A /* TheBestProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBestProjectUITests.swift; sourceTree = "<group>"; };
 		EC7D5BD527A29F7A006FD85A /* TheBestProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBestProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EC9BA90E27A7DE2600426468 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		EC9BA91027A7DE3600426468 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
-		EC9BA91327A7DE5100426468 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		EC9BA91427A7DE5100426468 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		EC9BA91727A7DF6900426468 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +113,6 @@
 			children = (
 				EC53665C27A3CD29001AA5F5 /* Users.swift */,
 				EC53665E27A3CFFB001AA5F5 /* Track.swift */,
-				EC9BA91027A7DE3600426468 /* Artist.swift */,
 				EC9BA91727A7DF6900426468 /* Playlist.swift */,
 				EC9BA90E27A7DE2600426468 /* Settings.swift */,
 				EC71FB5627AB8A1F00C4AEBC /* MyExtensions.swift */,
@@ -152,7 +143,6 @@
 				EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */,
 				EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */,
 				EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */,
-				EC748A5527B0F44D00192BA2 /* QueryCollectionViewController.swift */,
 			);
 			path = CollectionViewControllers;
 			sourceTree = "<group>";
@@ -228,8 +218,6 @@
 		EC9BA91227A7DE5100426468 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EC9BA91427A7DE5100426468 /* APIRequest.swift */,
-				EC9BA91327A7DE5100426468 /* APIService.swift */,
 				EC6C0A9B27A9165F002B0245 /* FetchingItems.swift */,
 			);
 			path = API;
@@ -369,7 +357,6 @@
 				EC71FB5B27ABB9A800C4AEBC /* PlaylistViewController.swift in Sources */,
 				EC7D5BB327A29F77006FD85A /* AppDelegate.swift in Sources */,
 				EC7970C227A3A2F900EC61BB /* SearchCollectionViewController.swift in Sources */,
-				EC9BA91627A7DE5100426468 /* APIRequest.swift in Sources */,
 				EC9BA91827A7DF6900426468 /* Playlist.swift in Sources */,
 				EC6C0A9A27A9032C002B0245 /* TrackCollectionViewCell.swift in Sources */,
 				EC71FB5927ABA57500C4AEBC /* AddTrackToPlaylistCollectionViewController.swift in Sources */,
@@ -383,10 +370,7 @@
 				EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */,
 				EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */,
 				EC7D5BB527A29F77006FD85A /* SceneDelegate.swift in Sources */,
-				EC9BA91527A7DE5100426468 /* APIService.swift in Sources */,
-				EC748A5627B0F44D00192BA2 /* QueryCollectionViewController.swift in Sources */,
 				EC71FB5727AB8A1F00C4AEBC /* MyExtensions.swift in Sources */,
-				EC9BA91127A7DE3600426468 /* Artist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

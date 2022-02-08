@@ -70,12 +70,10 @@ class HomePageCollectionViewController: UICollectionViewController {
                 }
                 self.imageLoadTasks[indexPath] = nil
             }
-            
             return cell
         })
         dataSource.apply(snapshot)
     }
-
     
     // MARK: createLayout()
     func createLayout() -> UICollectionViewLayout {
@@ -91,6 +89,7 @@ class HomePageCollectionViewController: UICollectionViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
+    // MARK: contexMenuConfig
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let item = self.dataSource.itemIdentifier(for: indexPath)!
@@ -105,6 +104,7 @@ class HomePageCollectionViewController: UICollectionViewController {
         return config
     }
     
+    //MARK: segue
     @IBSegueAction func openTrack(_ coder: NSCoder, sender: Any?) -> PlayerViewController? {
         let playerVC = PlayerViewController(coder: coder)
         
