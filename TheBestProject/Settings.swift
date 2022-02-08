@@ -53,8 +53,8 @@ struct Settings {
         
         favoriteTracks = favorite
     }
-    
-    // MARK: editing playlist methods
+
+    //MARK: Playlists
     var playlists: [Playlist] {
         get {
             unarchiveJSON(key: Setting.playlists) ?? []
@@ -64,6 +64,7 @@ struct Settings {
         }
     }
     
+    //MARK: createList
     mutating func createPlaylist(withName name: String?) {
         let playlistCount = playlists.count
         
@@ -77,6 +78,7 @@ struct Settings {
         playlists.append(newPlaylist)
     }
     
+    //MARK: addTrack
     mutating func addTrack(_ track: Track, to playlist: Playlist) {
         var editingPlaylist = playlists.first { $0 == playlist }!
         let index = playlists.firstIndex(where: { $0 == playlist })!
@@ -92,6 +94,7 @@ struct Settings {
         playlists.append(editingPlaylist)
     }
     
+    //MARK: editCover
     mutating func editCover(_ image: UIImage, to playlist: Playlist) {
         var editingPlaylist = playlists.first { $0 == playlist }!
         let index = playlists.firstIndex(where: { $0 == playlist })!
@@ -101,7 +104,7 @@ struct Settings {
         
         playlists.append(editingPlaylist)
     }
-    
+    // MARK: deleteList
     mutating func deletePlaylist(_ playlist: Playlist) {
         let index = playlists.firstIndex(where: { $0 == playlist })!
         playlists.remove(at: index)

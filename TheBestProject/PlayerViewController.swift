@@ -38,6 +38,11 @@ class PlayerViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        player?.pause()
+    }
+    
     //MARK: updateView()
     
     func updateView() {
@@ -108,15 +113,9 @@ class PlayerViewController: UIViewController {
         
         player!.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { (CMTime) -> Void in
             if self.player!.currentItem?.status == .readyToPlay {
-                let time : Float64 = CMTimeGetSeconds(self.player!.currentTime());
-                self.trackSlider.value = Float ( time );
+                let time : Float64 = CMTimeGetSeconds(self.player!.currentTime())
+                self.trackSlider.value = Float (time)
                 self.currentTimeLabel.text = self.stringFromTimeInterval(interval: time)
-            }
-            let playbackLikelyToKeepUp = self.player?.currentItem?.isPlaybackLikelyToKeepUp
-            if playbackLikelyToKeepUp == false{
-                self.playButton.isHidden = true
-            } else {
-                self.playButton.isHidden = false
             }
         }
         
@@ -163,6 +162,14 @@ class PlayerViewController: UIViewController {
     @IBAction func backwardButtonTapped(_ sender: Any) {
         currentTrack = query.last
         updateView()
+    }
+    @IBAction func heartButtonTapped(_ sender: Any) {
+        Settings.shared.toggleFavorite(self.currentTrack!)
+        if Settings.shared.favoriteTracks.contains(self.currentTrack!) {
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+        } else {
+            favoriteButton.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+        }
     }
     
 }

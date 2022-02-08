@@ -43,8 +43,7 @@ class HomePageCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        createDataSource()
-        collectionView.collectionViewLayout = createLayout()
+        self.dataSource.apply(self.snapshot)
     }
 
     // MARK: createDataSource()
@@ -111,6 +110,7 @@ class HomePageCollectionViewController: UICollectionViewController {
         if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
             let track = favoriteTracks[indexPath.item]
             playerVC?.currentTrack = track
+            
             return playerVC
         } else {
             return playerVC
