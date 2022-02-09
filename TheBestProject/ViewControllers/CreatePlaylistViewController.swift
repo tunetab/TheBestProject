@@ -9,8 +9,7 @@ import UIKit
 
 class CreatePlaylistViewController: UIViewController {
 
-    @IBOutlet weak var textField: UITextField!
-    var newPlaylist: Playlist?
+    @IBOutlet private var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,11 +7,9 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class HomePageCollectionViewController: UICollectionViewController {
 
-    var favoriteTracks: [Track] {
+    private var favoriteTracks: [Track] {
         return Settings.shared.favoriteTracks
     }
     
@@ -20,8 +18,8 @@ class HomePageCollectionViewController: UICollectionViewController {
     enum Section {
         case tracks
     }
-    var dataSource: UICollectionViewDiffableDataSource<Section, Track>!
-    var snapshot: NSDiffableDataSourceSnapshot<Section, Track> {
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Track>!
+    private var snapshot: NSDiffableDataSourceSnapshot<Section, Track> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Track>()
         
         snapshot.appendSections([.tracks])
@@ -30,7 +28,7 @@ class HomePageCollectionViewController: UICollectionViewController {
         return snapshot
     }
     
-    var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
+    private var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     
     // MARK: viewDidLoad()
     override func viewDidLoad() {
@@ -48,23 +46,25 @@ class HomePageCollectionViewController: UICollectionViewController {
 
     // MARK: createDataSource()
     
-    func createDataSource() {
+    private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Track>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCell", for: indexPath) as! TrackCollectionViewCell
-            cell.trackNameLabel.text = item.name
-            cell.artistLabel.text = item.artist
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackCollectionViewCell.reuseIdentifier, for: indexPath)
+            
+            guard let cell = cell as? TrackCollectionViewCell else { return cell }
+            
+            cell.fillLabels(trackName: item.name, artistName: item.artist)
             
             self.imageLoadTasks[indexPath]?.cancel()
             self.imageLoadTasks[indexPath] = Task {
                 do {
                     let image = try await self.fetchingItemController.fetchImage(from: item.artworkURL)
-                    cell.albumCoverImageView.image = image
+                    cell.fillImage(image)
                 } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
                     // ignore cancellation errors
                 } catch {
-                    cell.albumCoverImageView.image = UIImage(systemName: "photo")
+                    cell.fillImage(nil)
                     print("Error fetching image: \(error)")
                 }
                 self.imageLoadTasks[indexPath] = nil
@@ -75,7 +75,7 @@ class HomePageCollectionViewController: UICollectionViewController {
     }
     
     // MARK: createLayout()
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(63))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
@@ -104,17 +104,23 @@ class HomePageCollectionViewController: UICollectionViewController {
     }
     
     //MARK: segue
-    @IBSegueAction func openTrack(_ coder: NSCoder, sender: Any?) -> PlayerViewController? {
-        let playerVC = PlayerViewController(coder: coder)
+
+    private func openPlayer(_ track: Track) {
+        performSegue(withIdentifier: "OpenPlayer", sender: track)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = self.dataSource.itemIdentifier(for: indexPath)!
         
-        if let cell = sender as? TrackCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
-            let track = favoriteTracks[indexPath.item]
-            playerVC?.currentTrack = track
-            
-            return playerVC
-        } else {
-            return playerVC
+        self.openPlayer(item)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "OpenPlayer",
+              let PlayerVC = segue.destination as? PlayerViewController else { return }
+        
+        if let track = sender as? Track {
+            PlayerVC.currentTrack = track
         }
     }
-
 }

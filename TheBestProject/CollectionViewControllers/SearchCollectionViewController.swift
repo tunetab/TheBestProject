@@ -7,21 +7,19 @@
 
 import UIKit
 
-private let reuseIdentifier = "TrackCell"
-
 class SearchCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
     
-    let searchController = UISearchController()
-    let fetchingItemController = FetchingItemsController()
+    private let searchController = UISearchController()
+    private let fetchingItemController = FetchingItemsController()
     
-    var items = [Track]()
+    private var items = [Track]()
     
-    var searchTask: Task<Void, Never>? = nil
-    var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
+    private var searchTask: Task<Void, Never>? = nil
+    private var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     
     // MARK: dataSource
-    var dataSource: UICollectionViewDiffableDataSource<String, Track>!
-    var itemsSnapshot: NSDiffableDataSourceSnapshot<String, Track> {
+    private var dataSource: UICollectionViewDiffableDataSource<String, Track>!
+    private var itemsSnapshot: NSDiffableDataSourceSnapshot<String, Track> {
         var snapshot = NSDiffableDataSourceSnapshot<String, Track>()
         
         snapshot.appendSections(["Results"])
@@ -93,35 +91,35 @@ class SearchCollectionViewController: UICollectionViewController, UISearchResult
     }
     
     // MARK: createDataSource()
-    func createDataSource() {
+    private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<String, Track>(
             collectionView: collectionView, cellProvider: {
                 (collectionView, indexPath, item) -> UICollectionViewCell? in
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TrackCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackCollectionViewCell.reuseIdentifier, for: indexPath)
                 
-                cell.trackNameLabel.text = item.name
-                cell.artistLabel.text = item.artist
+                guard let cell = cell as? TrackCollectionViewCell else { return cell }
+                
+                cell.fillLabels(trackName: item.name, artistName: item.artist)
                 
                 self.imageLoadTasks[indexPath]?.cancel()
                 self.imageLoadTasks[indexPath] = Task {
                     do {
                         let image = try await self.fetchingItemController.fetchImage(from: item.artworkURL)
-                        cell.albumCoverImageView.image = image
+                        cell.fillImage(image)
                     } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
                         // ignore cancellation errors
                     } catch {
-                        cell.albumCoverImageView.image = UIImage(systemName: "photo")
+                        cell.fillImage(nil)
                         print("Error fetching image: \(error)")
                     }
                     self.imageLoadTasks[indexPath] = nil
                 }
-                
                 return cell
             }
         )
     }
     // MARK: createLayout()
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(63))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
             

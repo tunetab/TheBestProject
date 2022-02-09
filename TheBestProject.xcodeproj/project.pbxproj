@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EC53665D27A3CD29001AA5F5 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665C27A3CD29001AA5F5 /* Users.swift */; };
 		EC53665F27A3CFFB001AA5F5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53665E27A3CFFB001AA5F5 /* Track.swift */; };
-		EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */; };
 		EC53666A27A3E793001AA5F5 /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */; };
 		EC6C0A9827A8EA0F002B0245 /* CreatePlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C0A9727A8EA0F002B0245 /* CreatePlaylistViewController.swift */; };
 		EC6C0A9A27A9032C002B0245 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C0A9927A9032C002B0245 /* TrackCollectionViewCell.swift */; };
@@ -54,15 +53,13 @@
 		EC1F362327AA7B42009F0683 /* AddTrackToPlaylistCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackToPlaylistCollectionViewController.swift; sourceTree = "<group>"; };
 		EC53665C27A3CD29001AA5F5 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		EC53665E27A3CFFB001AA5F5 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
-		EC53666027A3D2AD001AA5F5 /* TheBestProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheBestProject-Bridging-Header.h"; sourceTree = "<group>"; };
-		EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		EC53666927A3E793001AA5F5 /* PlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		EC6C0A9727A8EA0F002B0245 /* CreatePlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewController.swift; sourceTree = "<group>"; };
 		EC6C0A9927A9032C002B0245 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
 		EC6C0A9B27A9165F002B0245 /* FetchingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingItems.swift; sourceTree = "<group>"; };
 		EC71FB5627AB8A1F00C4AEBC /* MyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyExtensions.swift; sourceTree = "<group>"; };
 		EC71FB5A27ABB9A800C4AEBC /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
-		EC748A5327B0CA7400192BA2 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = ../PlayerViewController.swift; sourceTree = "<group>"; };
+		EC748A5327B0CA7400192BA2 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		EC7970C127A3A2F900EC61BB /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C327A3A30700EC61BB /* HomePageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7970C527A3A31B00EC61BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +84,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC53666827A3D845001AA5F5 /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,26 +104,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC53665B27A3CD12001AA5F5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				EC53665C27A3CD29001AA5F5 /* Users.swift */,
-				EC53665E27A3CFFB001AA5F5 /* Track.swift */,
-				EC9BA91727A7DF6900426468 /* Playlist.swift */,
-				EC9BA90E27A7DE2600426468 /* Settings.swift */,
-				EC71FB5627AB8A1F00C4AEBC /* MyExtensions.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		EC53666627A3D833001AA5F5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EC53666727A3D845001AA5F5 /* SpotifyiOS.framework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 		EC53666B27A3E796001AA5F5 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +137,6 @@
 		EC7D5BA627A29F77006FD85A = {
 			isa = PBXGroup;
 			children = (
-				EC53666627A3D833001AA5F5 /* Frameworks */,
 				EC7D5BB127A29F77006FD85A /* TheBestProject */,
 				EC7D5BC827A29F7A006FD85A /* TheBestProjectTests */,
 				EC7D5BD227A29F7A006FD85A /* TheBestProjectUITests */,
@@ -182,7 +157,6 @@
 		EC7D5BB127A29F77006FD85A /* TheBestProject */ = {
 			isa = PBXGroup;
 			children = (
-				EC53666027A3D2AD001AA5F5 /* TheBestProject-Bridging-Header.h */,
 				EC7D5BB227A29F77006FD85A /* AppDelegate.swift */,
 				EC7D5BB427A29F77006FD85A /* SceneDelegate.swift */,
 				EC7D5BB827A29F77006FD85A /* Main.storyboard */,
@@ -190,7 +164,7 @@
 				EC7D5BBD27A29F7A006FD85A /* LaunchScreen.storyboard */,
 				EC7D5BC027A29F7A006FD85A /* Info.plist */,
 				EC9BA91227A7DE5100426468 /* API */,
-				EC53665B27A3CD12001AA5F5 /* Models */,
+				EC7F5FDC27B3C60700C3EF10 /* Model */,
 				EC7970C827A3A34000EC61BB /* ViewControllers */,
 				EC53666B27A3E796001AA5F5 /* CollectionViewCells */,
 				EC7970C727A3A33200EC61BB /* CollectionViewControllers */,
@@ -213,6 +187,18 @@
 				EC7D5BD527A29F7A006FD85A /* TheBestProjectUITestsLaunchTests.swift */,
 			);
 			path = TheBestProjectUITests;
+			sourceTree = "<group>";
+		};
+		EC7F5FDC27B3C60700C3EF10 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC53665C27A3CD29001AA5F5 /* Users.swift */,
+				EC53665E27A3CFFB001AA5F5 /* Track.swift */,
+				EC9BA91727A7DF6900426468 /* Playlist.swift */,
+				EC9BA90E27A7DE2600426468 /* Settings.swift */,
+				EC71FB5627AB8A1F00C4AEBC /* MyExtensions.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EC9BA91227A7DE5100426468 /* API */ = {
@@ -571,7 +557,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheBestProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/TheBestProject/TheBestProject-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -607,7 +592,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheBestProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/TheBestProject/TheBestProject-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";

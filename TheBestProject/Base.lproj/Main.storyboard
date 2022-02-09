@@ -76,7 +76,6 @@
                                     <outlet property="albumCoverImageView" destination="akr-HG-v8B" id="QSN-7K-YYn"/>
                                     <outlet property="artistLabel" destination="KN1-VF-q3v" id="VCo-yz-w3d"/>
                                     <outlet property="trackNameLabel" destination="4MS-0C-Ula" id="Vbp-Ye-4ih"/>
-                                    <segue destination="t2v-Vh-Rnv" kind="show" destinationCreationSelector="openTrack:sender:" id="fzf-yx-Bor"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -86,6 +85,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Favorite Songs" id="zeM-nH-H6G"/>
+                    <connections>
+                        <segue destination="t2v-Vh-Rnv" kind="show" identifier="OpenPlayer" id="cYm-Hq-Axz"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lh-e2-LEa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -252,7 +254,6 @@
                                         <connections>
                                             <outlet property="playListImageView" destination="bWU-kH-4As" id="leF-cf-u5R"/>
                                             <outlet property="playlistNameLabel" destination="7eu-ee-EXa" id="p4h-MS-jFy"/>
-                                            <segue destination="cv9-jl-sB7" kind="show" identifier="showPlaylist" destinationCreationSelector="openPlaylist:sender:" id="C4M-0O-0e1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -287,6 +288,7 @@
                         <outlet property="collectionView" destination="CSI-IP-xaN" id="gpE-w3-LLh"/>
                         <outlet property="imageView" destination="nn2-mt-zLg" id="0gV-wx-WIV"/>
                         <outlet property="nameLabel" destination="kX1-Df-rjg" id="M6v-29-sRL"/>
+                        <segue destination="cv9-jl-sB7" kind="show" identifier="OpenPlaylist" id="ZGd-Rx-bXH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOr-So-Cw9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

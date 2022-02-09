@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct SearchResponse: Codable {
     let results: [Track]

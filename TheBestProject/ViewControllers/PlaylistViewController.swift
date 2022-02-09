@@ -11,22 +11,22 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
 
     var playlist: Playlist?
     
-    var tracks: [Track] {
+    private var tracks: [Track] {
         return playlist?.tracks ?? []
     }
     
-    let fetchingItemController = FetchingItemsController()
+    private let fetchingItemController = FetchingItemsController()
 
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var authorOfPlaylistLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private var coverImageView: UIImageView!
+    @IBOutlet private var descriptionLabel: UILabel!
+    @IBOutlet private var authorOfPlaylistLabel: UILabel!
+    @IBOutlet private var collectionView: UICollectionView!
     
-    enum Section {
+    private enum Section {
         case tracks
     }
-    var dataSource: UICollectionViewDiffableDataSource<Section, Track>!
-    var snapshot: NSDiffableDataSourceSnapshot<Section, Track> {
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Track>!
+    private var snapshot: NSDiffableDataSourceSnapshot<Section, Track> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Track>()
         
         snapshot.appendSections([.tracks])
@@ -35,7 +35,7 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         return snapshot
     }
     
-    var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
+    private var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     
     // MARK: viewDidLoad()
     override func viewDidLoad() {
@@ -55,8 +55,8 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
         
         updateView()
     }
-    
-    func updateView() {
+    //MARK: updateView()
+    private func updateView() {
         
         navigationItem.title = playlist!.name
         coverImageView.image = playlist!.image.getImage()
@@ -68,35 +68,36 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
     }
     
     // MARK: createDataSource()
-    func createDataSource() {
+    private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Track>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCell", for: indexPath) as! TrackCollectionViewCell
-            cell.trackNameLabel.text = item.name
-            cell.artistLabel.text = item.artist
-                        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackCollectionViewCell.reuseIdentifier, for: indexPath)
+            
+            guard let cell = cell as? TrackCollectionViewCell else { return cell }
+            
+            cell.fillLabels(trackName: item.name, artistName: item.artist)
+            
             self.imageLoadTasks[indexPath]?.cancel()
             self.imageLoadTasks[indexPath] = Task {
                 do {
                     let image = try await self.fetchingItemController.fetchImage(from: item.artworkURL)
-                    cell.albumCoverImageView.image = image
+                    cell.fillImage(image)
                 } catch let error as NSError where error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
                     // ignore cancellation errors
                 } catch {
-                    cell.albumCoverImageView.image = UIImage(systemName: "photo")
+                    cell.fillImage(nil)
                     print("Error fetching image: \(error)")
                 }
                 self.imageLoadTasks[indexPath] = nil
             }
-            
             return cell
         })
         dataSource.apply(snapshot)
     }
 
     // MARK: createLayout()
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(63))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
@@ -121,7 +122,7 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
     }
     
     // MARK: deleteAlert()
-    func showDeleteAlert() {
+    private func showDeleteAlert() {
         let alertController = UIAlertController(title: "Are You sure to delete playlist \(self.playlist!.name)?", message: nil, preferredStyle: .alert)
         alertController.addAction(.init(title: "Yes", style: .cancel, handler: { [weak self] _ in
             guard let self = self else { return }
@@ -133,7 +134,7 @@ class PlaylistViewController: UIViewController, UIContextMenuInteractionDelegate
     }
 
     //MARK: mediaAlert()
-    func showMediaAlert() {
+    private func showMediaAlert() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         

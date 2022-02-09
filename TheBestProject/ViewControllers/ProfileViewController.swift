@@ -6,25 +6,24 @@
 //
 
 import UIKit
-private let reuseIdentifier = "Cell"
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UIContextMenuInteractionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var bioLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var bioLabel: UILabel!
+    @IBOutlet private var collectionView: UICollectionView!
     
-    var playlists: [Playlist] {
+    private var playlists: [Playlist] {
         return Settings.shared.playlists
     }
     
     // MARK: dataSource
-    enum Section {
+    private enum Section {
         case playlists
     }
-    var dataSource: UICollectionViewDiffableDataSource<Section, Playlist>!
-    var snapshot: NSDiffableDataSourceSnapshot<Section, Playlist> {
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Playlist>!
+    private var snapshot: NSDiffableDataSourceSnapshot<Section, Playlist> {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Playlist>()
         
         snapshot.appendSections([.playlists])
@@ -35,15 +34,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIConte
     // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.delegate = self
-        
-        imageView.isUserInteractionEnabled = true
-        let interaction = UIContextMenuInteraction(delegate: self)
-        imageView.addInteraction(interaction)
-        
+
         createDataSource()
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+        setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,31 +45,42 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIConte
         updateView()
     }
     
-    // MARK: updateView()
+    //MARK: SetupColectionView()
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    }
     
-    func updateView() {
+    // MARK: updateView()
+    private func updateView() {
         nameLabel.text = Settings.shared.currentUser.name
         bioLabel.text = Settings.shared.currentUser.bio
         imageView.image = Settings.shared.currentUser.image?.getImage() ?? UIImage(systemName: "person.fill")
+        
+        imageView.isUserInteractionEnabled = true
+        let interaction = UIContextMenuInteraction(delegate: self)
+        imageView.addInteraction(interaction)
         
         self.dataSource.apply(self.snapshot)
     }
     
     // MARK: createDataSource()
-    func createDataSource() {
+    private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Playlist>(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaylistCollectionViewCell.reuseIdentifier, for: indexPath)
+            guard let cell = cell as? PlaylistCollectionViewCell else { return cell }
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCollectionViewCell
-            cell.playListImageView.image = item.image.getImage()
-            cell.playlistNameLabel.text = item.name
+            cell.fill(item.name, item.image.getImage())
+            
             return cell
         })
         dataSource.apply(snapshot)
     }
     
     //MARK: createLayout()
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(63)))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(65)), subitem: item, count: 1)
         let spacing: CGFloat = 8
@@ -86,16 +90,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIConte
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    //MARK: LookingClosureToPlaylists
-    @IBSegueAction func openPlaylist(_ coder: NSCoder, sender: Any?) -> PlaylistViewController? {
-        let playlistController = PlaylistViewController(coder: coder)
+    //MARK: openPlaylst
+    
+    private func openPlaylist(_ playlist: Playlist) {
+        performSegue(withIdentifier: "OpenPlaylist", sender: playlist)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = self.dataSource.itemIdentifier(for: indexPath)!
         
-        if let cell = sender as? PlaylistCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
-            let selectedPlaylist = playlists[indexPath.item]
-            playlistController?.playlist = selectedPlaylist
-            return playlistController
-        } else {
-            return playlistController
+        self.openPlaylist(item)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "OpenPlaylist",
+              let PlaylistVC = segue.destination as? PlaylistViewController else { return }
+        
+        if let playlist = sender as? Playlist {
+            PlaylistVC.playlist = playlist
         }
     }
 
@@ -115,7 +127,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIConte
     }
     
     // MARK: deleteAlert()
-    func showDeleteAlert(_ playlist: Playlist) {
+    private func showDeleteAlert(_ playlist: Playlist) {
         let alertController = UIAlertController(title: "Are You sure to delete playlist \(playlist.name)?", message: nil, preferredStyle: .alert)
         alertController.addAction(.init(title: "Yes", style: .cancel, handler: { [weak self] _ in
             guard let self = self else { return }
@@ -138,7 +150,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIConte
     }
     
     // MARK: mediaAlert()
-    func showMediaAlert() {
+    private func showMediaAlert() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
