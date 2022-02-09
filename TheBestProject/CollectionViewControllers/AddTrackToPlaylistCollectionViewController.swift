@@ -79,7 +79,6 @@ class AddTrackToPlaylistCollectionViewController: UICollectionViewController {
     @IBAction func unwindFromCreatingToAdding(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind",
             let _ = segue.source as? CreatePlaylistViewController else { return }
-        
         self.dataSource.apply(self.snapshot)
     }
 
